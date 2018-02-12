@@ -1,0 +1,563 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 48;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		FA1F25D2203212E50070ADA3 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA1F25D1203212E50070ADA3 /* AppDelegate.swift */; };
+		FA1F25D4203212E50070ADA3 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA1F25D3203212E50070ADA3 /* ViewController.swift */; };
+		FA1F25D7203212E50070ADA3 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FA1F25D5203212E50070ADA3 /* Main.storyboard */; };
+		FA1F25D9203212E50070ADA3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FA1F25D8203212E50070ADA3 /* Assets.xcassets */; };
+		FA1F25DC203212E50070ADA3 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FA1F25DA203212E50070ADA3 /* LaunchScreen.storyboard */; };
+		FA1F25E7203212E60070ADA3 /* collegebookTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA1F25E6203212E60070ADA3 /* collegebookTests.swift */; };
+		FA1F25F2203212E60070ADA3 /* collegebookUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA1F25F1203212E60070ADA3 /* collegebookUITests.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		FA1F25E3203212E60070ADA3 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = FA1F25C6203212E50070ADA3 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = FA1F25CD203212E50070ADA3;
+			remoteInfo = collegebook;
+		};
+		FA1F25EE203212E60070ADA3 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = FA1F25C6203212E50070ADA3 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = FA1F25CD203212E50070ADA3;
+			remoteInfo = collegebook;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		FA1F25CE203212E50070ADA3 /* collegebook.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = collegebook.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		FA1F25D1203212E50070ADA3 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		FA1F25D3203212E50070ADA3 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		FA1F25D6203212E50070ADA3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		FA1F25D8203212E50070ADA3 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		FA1F25DB203212E50070ADA3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		FA1F25DD203212E50070ADA3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		FA1F25E2203212E60070ADA3 /* collegebookTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = collegebookTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		FA1F25E6203212E60070ADA3 /* collegebookTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = collegebookTests.swift; sourceTree = "<group>"; };
+		FA1F25E8203212E60070ADA3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		FA1F25ED203212E60070ADA3 /* collegebookUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = collegebookUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		FA1F25F1203212E60070ADA3 /* collegebookUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = collegebookUITests.swift; sourceTree = "<group>"; };
+		FA1F25F3203212E60070ADA3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		FA1F25CB203212E50070ADA3 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		FA1F25DF203212E60070ADA3 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		FA1F25EA203212E60070ADA3 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		FA1F25C5203212E50070ADA3 = {
+			isa = PBXGroup;
+			children = (
+				FA1F25D0203212E50070ADA3 /* collegebook */,
+				FA1F25E5203212E60070ADA3 /* collegebookTests */,
+				FA1F25F0203212E60070ADA3 /* collegebookUITests */,
+				FA1F25CF203212E50070ADA3 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		FA1F25CF203212E50070ADA3 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				FA1F25CE203212E50070ADA3 /* collegebook.app */,
+				FA1F25E2203212E60070ADA3 /* collegebookTests.xctest */,
+				FA1F25ED203212E60070ADA3 /* collegebookUITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		FA1F25D0203212E50070ADA3 /* collegebook */ = {
+			isa = PBXGroup;
+			children = (
+				FA1F25D1203212E50070ADA3 /* AppDelegate.swift */,
+				FA1F25D3203212E50070ADA3 /* ViewController.swift */,
+				FA1F25D5203212E50070ADA3 /* Main.storyboard */,
+				FA1F25D8203212E50070ADA3 /* Assets.xcassets */,
+				FA1F25DA203212E50070ADA3 /* LaunchScreen.storyboard */,
+				FA1F25DD203212E50070ADA3 /* Info.plist */,
+			);
+			path = collegebook;
+			sourceTree = "<group>";
+		};
+		FA1F25E5203212E60070ADA3 /* collegebookTests */ = {
+			isa = PBXGroup;
+			children = (
+				FA1F25E6203212E60070ADA3 /* collegebookTests.swift */,
+				FA1F25E8203212E60070ADA3 /* Info.plist */,
+			);
+			path = collegebookTests;
+			sourceTree = "<group>";
+		};
+		FA1F25F0203212E60070ADA3 /* collegebookUITests */ = {
+			isa = PBXGroup;
+			children = (
+				FA1F25F1203212E60070ADA3 /* collegebookUITests.swift */,
+				FA1F25F3203212E60070ADA3 /* Info.plist */,
+			);
+			path = collegebookUITests;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		FA1F25CD203212E50070ADA3 /* collegebook */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = FA1F25F6203212E60070ADA3 /* Build configuration list for PBXNativeTarget "collegebook" */;
+			buildPhases = (
+				FA1F25CA203212E50070ADA3 /* Sources */,
+				FA1F25CB203212E50070ADA3 /* Frameworks */,
+				FA1F25CC203212E50070ADA3 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = collegebook;
+			productName = collegebook;
+			productReference = FA1F25CE203212E50070ADA3 /* collegebook.app */;
+			productType = "com.apple.product-type.application";
+		};
+		FA1F25E1203212E60070ADA3 /* collegebookTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = FA1F25F9203212E60070ADA3 /* Build configuration list for PBXNativeTarget "collegebookTests" */;
+			buildPhases = (
+				FA1F25DE203212E60070ADA3 /* Sources */,
+				FA1F25DF203212E60070ADA3 /* Frameworks */,
+				FA1F25E0203212E60070ADA3 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				FA1F25E4203212E60070ADA3 /* PBXTargetDependency */,
+			);
+			name = collegebookTests;
+			productName = collegebookTests;
+			productReference = FA1F25E2203212E60070ADA3 /* collegebookTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		FA1F25EC203212E60070ADA3 /* collegebookUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = FA1F25FC203212E60070ADA3 /* Build configuration list for PBXNativeTarget "collegebookUITests" */;
+			buildPhases = (
+				FA1F25E9203212E60070ADA3 /* Sources */,
+				FA1F25EA203212E60070ADA3 /* Frameworks */,
+				FA1F25EB203212E60070ADA3 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				FA1F25EF203212E60070ADA3 /* PBXTargetDependency */,
+			);
+			name = collegebookUITests;
+			productName = collegebookUITests;
+			productReference = FA1F25ED203212E60070ADA3 /* collegebookUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		FA1F25C6203212E50070ADA3 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 0920;
+				LastUpgradeCheck = 0920;
+				ORGANIZATIONNAME = "Alex Speicher";
+				TargetAttributes = {
+					FA1F25CD203212E50070ADA3 = {
+						CreatedOnToolsVersion = 9.2;
+						ProvisioningStyle = Automatic;
+					};
+					FA1F25E1203212E60070ADA3 = {
+						CreatedOnToolsVersion = 9.2;
+						ProvisioningStyle = Automatic;
+						TestTargetID = FA1F25CD203212E50070ADA3;
+					};
+					FA1F25EC203212E60070ADA3 = {
+						CreatedOnToolsVersion = 9.2;
+						ProvisioningStyle = Automatic;
+						TestTargetID = FA1F25CD203212E50070ADA3;
+					};
+				};
+			};
+			buildConfigurationList = FA1F25C9203212E50070ADA3 /* Build configuration list for PBXProject "collegebook" */;
+			compatibilityVersion = "Xcode 8.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = FA1F25C5203212E50070ADA3;
+			productRefGroup = FA1F25CF203212E50070ADA3 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				FA1F25CD203212E50070ADA3 /* collegebook */,
+				FA1F25E1203212E60070ADA3 /* collegebookTests */,
+				FA1F25EC203212E60070ADA3 /* collegebookUITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		FA1F25CC203212E50070ADA3 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				FA1F25DC203212E50070ADA3 /* LaunchScreen.storyboard in Resources */,
+				FA1F25D9203212E50070ADA3 /* Assets.xcassets in Resources */,
+				FA1F25D7203212E50070ADA3 /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		FA1F25E0203212E60070ADA3 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		FA1F25EB203212E60070ADA3 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		FA1F25CA203212E50070ADA3 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				FA1F25D4203212E50070ADA3 /* ViewController.swift in Sources */,
+				FA1F25D2203212E50070ADA3 /* AppDelegate.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		FA1F25DE203212E60070ADA3 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				FA1F25E7203212E60070ADA3 /* collegebookTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		FA1F25E9203212E60070ADA3 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				FA1F25F2203212E60070ADA3 /* collegebookUITests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		FA1F25E4203212E60070ADA3 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = FA1F25CD203212E50070ADA3 /* collegebook */;
+			targetProxy = FA1F25E3203212E60070ADA3 /* PBXContainerItemProxy */;
+		};
+		FA1F25EF203212E60070ADA3 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = FA1F25CD203212E50070ADA3 /* collegebook */;
+			targetProxy = FA1F25EE203212E60070ADA3 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		FA1F25D5203212E50070ADA3 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				FA1F25D6203212E50070ADA3 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		FA1F25DA203212E50070ADA3 /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				FA1F25DB203212E50070ADA3 /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		FA1F25F4203212E60070ADA3 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.2;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		FA1F25F5203212E60070ADA3 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.2;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		FA1F25F7203212E60070ADA3 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = HXB7G8AA78;
+				INFOPLIST_FILE = collegebook/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.Alex-Speicher.collegebook";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		FA1F25F8203212E60070ADA3 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = HXB7G8AA78;
+				INFOPLIST_FILE = collegebook/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.Alex-Speicher.collegebook";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		FA1F25FA203212E60070ADA3 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = HXB7G8AA78;
+				INFOPLIST_FILE = collegebookTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.Alex-Speicher.collegebookTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/collegebook.app/collegebook";
+			};
+			name = Debug;
+		};
+		FA1F25FB203212E60070ADA3 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = HXB7G8AA78;
+				INFOPLIST_FILE = collegebookTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.Alex-Speicher.collegebookTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/collegebook.app/collegebook";
+			};
+			name = Release;
+		};
+		FA1F25FD203212E60070ADA3 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = HXB7G8AA78;
+				INFOPLIST_FILE = collegebookUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.Alex-Speicher.collegebookUITests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = collegebook;
+			};
+			name = Debug;
+		};
+		FA1F25FE203212E60070ADA3 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = HXB7G8AA78;
+				INFOPLIST_FILE = collegebookUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.Alex-Speicher.collegebookUITests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = collegebook;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		FA1F25C9203212E50070ADA3 /* Build configuration list for PBXProject "collegebook" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				FA1F25F4203212E60070ADA3 /* Debug */,
+				FA1F25F5203212E60070ADA3 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		FA1F25F6203212E60070ADA3 /* Build configuration list for PBXNativeTarget "collegebook" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				FA1F25F7203212E60070ADA3 /* Debug */,
+				FA1F25F8203212E60070ADA3 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		FA1F25F9203212E60070ADA3 /* Build configuration list for PBXNativeTarget "collegebookTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				FA1F25FA203212E60070ADA3 /* Debug */,
+				FA1F25FB203212E60070ADA3 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		FA1F25FC203212E60070ADA3 /* Build configuration list for PBXNativeTarget "collegebookUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				FA1F25FD203212E60070ADA3 /* Debug */,
+				FA1F25FE203212E60070ADA3 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = FA1F25C6203212E50070ADA3 /* Project object */;
+}
