@@ -1,0 +1,152 @@
+//
+//  NotePad.swift
+//  collegebook
+//
+//  Created by Alex Speicher on 1/13/18.
+//  Copyright © 2018 Alex Speicher. All rights reserved.
+//
+
+import UIKit
+
+class NoteCanvas: UIView {
+    var strokePaths = [[CBFile.Stroke]()]
+    var removedStrokes = [[CBFile.Stroke]()]
+    var index = 0
+    
+    var background: UIColor? {
+        didSet {
+            self.backgroundColor = background
+            print("Set Document Background")
+        }
+    }
+    
+    override init(frame : CGRect){
+        super.init(frame: frame)
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    var delegate: NotePadDelegate?
+    // MARK: - Stroke variables
+    var strokeSize: Float = 5.0
+    var strokeOpacity: Float = 1.0
+    var strokeColorHex: Int = 0x000000
+    var touchPoint: CGPoint!
+    var startingPoint: CGPoint!
+    
+    var lowestYPoint: CGFloat = 0.0
+    let PageHeight = UIScreen.main.bounds.height
+    let PageWidth = UIScreen.main.bounds.width
+    /*
+    override func layoutSubviews() {
+        self.clipsToBounds = true
+        self.isMultipleTouchEnabled = false
+        
+    }
+    */
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        strokePaths.append([CBFile.Stroke]())
+        let touch = touches.first
+        startingPoint = touch?.location(in: self)
+        index += 1
+        let stroke = CBFile.Stroke(strokePoint: startingPoint, strokeColorHex: strokeColorHex, strokeSize: strokeSize, strokeOpacity: strokeOpacity)
+        strokePaths[index].append(stroke)
+        self.setNeedsDisplay()
+ 
+    }
+    
+    override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
+        let touch = touches.first
+        touchPoint = touch?.location(in: self)
+        let stroke = CBFile.Stroke(strokePoint: touchPoint, strokeColorHex: strokeColorHex, strokeSize: strokeSize, strokeOpacity: strokeOpacity)
+        strokePaths[index].append(stroke)
+        self.setNeedsDisplay()
+        
+    }
+    
+    override func draw(_ rect: CGRect) {
+        let context = UIGraphicsGetCurrentContext()
+        
+        for path in strokePaths {
+            if path.count >= 1 {
+                context!.beginPath()
+                context?.move(to: path[0].strokePoint)
+                for strokes in path{
+                    context!.setLineWidth(CGFloat(strokes.strokeSize))
+                    context!.setStrokeColor(UIColor(rgb: strokes.strokeColorHex).withAlphaComponent(CGFloat(strokes.strokeOpacity)).cgColor)
+                    context!.setLineCap(.round)
+                    context?.addLine(to: strokes.strokePoint)
+                }
+                context!.strokePath()
+            }
+        }
+
+    }
+
+    func clearCanvas(){
+        if(index >= 0){
+            strokePaths = [[CBFile.Stroke]()]
+            self.setNeedsDisplay()
+            index = 0
+        }
+    }
+    
+    func undo(){
+        if strokePaths.count > 1{
+            removedStrokes.append(strokePaths.last!)
+            strokePaths.removeLast()//(at: (strokePaths.count - 1))
+            self.setNeedsDisplay()
+            index -= 1
+        }
+    }
+    
+    func redo(){
+        if removedStrokes.count > 1{
+            strokePaths.append(removedStrokes.last!)
+            removedStrokes.removeLast()
+            self.setNeedsDisplay()
+            index += 1
+        }
+    }
+
+}
+
+public extension UIImage {
+    public convenience init?(Pattern: String, BackgroundColor: UIColor, GuidesColor: UIColor, Scale: Float) {
+        var Patternrect: CGRect!
+        var DrawPath =  [CGPoint]()
+        
+        switch Pattern {
+            case "Hex":
+                Patternrect = CGRect(origin: .zero, size: CGSize(width: 17.32052, height: 30))
+                DrawPath = [CGPoint(x: 17.32052, y: 7.5),CGPoint(x: 12.99038, y: 5),CGPoint(x: 12.99038, y: 0),CGPoint(x: 12.99038, y: 5),CGPoint(x: 4.33013, y: 10),CGPoint(x: 0, y: 7.5),CGPoint(x: 4.33013, y: 10),CGPoint(x: 4.33013, y: 20),CGPoint(x: 0, y: 22.5),CGPoint(x: 4.33013, y: 20),CGPoint(x: 12.99038, y: 25),CGPoint(x: 12.99038, y: 30),CGPoint(x: 12.99038, y: 25),CGPoint(x: 17.32052, y: 22.5)]
+            case "Graph":
+                Patternrect = CGRect(origin: .zero, size: CGSize(width: 25, height: 25))
+                DrawPath = [CGPoint(x: 0, y: 12.5),CGPoint(x: 25, y: 12.5),CGPoint(x: 12.5, y: 12.5),CGPoint(x: 12.5, y: 0),CGPoint(x: 12.5, y: 25)]
+            case "Ruled":
+                Patternrect = CGRect(origin: .zero, size: CGSize(width: 50, height: 25))
+                DrawPath = [CGPoint(x: 0, y: 25),CGPoint(x: 50, y: 25)]
+            default:
+                print( "default case")
+        }
+        UIGraphicsBeginImageContextWithOptions(Patternrect.size, false, 0.0)
+        let Patternpath = UIBezierPath()
+        Patternpath.move(to: DrawPath[0])
+        for Point in DrawPath[1...] {
+            Patternpath.addLine(to: Point)
+        }
+        BackgroundColor.setFill()
+        UIRectFill(Patternrect)
+        GuidesColor.setStroke()
+        Patternpath.stroke()
+        
+        let image = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        
+        guard let cgImage = image?.cgImage else { return nil }
+        self.init(cgImage: cgImage)
+    }
+}
+

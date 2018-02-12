@@ -8,12 +8,27 @@
 
 /* Begin PBXBuildFile section */
 		FA1F25D2203212E50070ADA3 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA1F25D1203212E50070ADA3 /* AppDelegate.swift */; };
-		FA1F25D4203212E50070ADA3 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA1F25D3203212E50070ADA3 /* ViewController.swift */; };
-		FA1F25D7203212E50070ADA3 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FA1F25D5203212E50070ADA3 /* Main.storyboard */; };
 		FA1F25D9203212E50070ADA3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FA1F25D8203212E50070ADA3 /* Assets.xcassets */; };
 		FA1F25DC203212E50070ADA3 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FA1F25DA203212E50070ADA3 /* LaunchScreen.storyboard */; };
 		FA1F25E7203212E60070ADA3 /* collegebookTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA1F25E6203212E60070ADA3 /* collegebookTests.swift */; };
 		FA1F25F2203212E60070ADA3 /* collegebookUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA1F25F1203212E60070ADA3 /* collegebookUITests.swift */; };
+		FA1F26112032136F0070ADA3 /* cDocViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA1F26002032136E0070ADA3 /* cDocViewController.swift */; };
+		FA1F26122032136F0070ADA3 /* NotePadDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA1F26012032136E0070ADA3 /* NotePadDelegate.swift */; };
+		FA1F26132032136F0070ADA3 /* StrokePopUpView.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FA1F26022032136E0070ADA3 /* StrokePopUpView.storyboard */; };
+		FA1F26142032136F0070ADA3 /* StrokeSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA1F26032032136E0070ADA3 /* StrokeSettings.swift */; };
+		FA1F26152032136F0070ADA3 /* DocumentView.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FA1F26042032136E0070ADA3 /* DocumentView.storyboard */; };
+		FA1F26162032136F0070ADA3 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FA1F26052032136F0070ADA3 /* Main.storyboard */; };
+		FA1F26172032136F0070ADA3 /* MainMenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA1F26062032136F0070ADA3 /* MainMenuViewController.swift */; };
+		FA1F26182032136F0070ADA3 /* SettingsView.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FA1F26072032136F0070ADA3 /* SettingsView.storyboard */; };
+		FA1F26192032136F0070ADA3 /* DocumentCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA1F26082032136F0070ADA3 /* DocumentCollectionViewCell.swift */; };
+		FA1F261A2032136F0070ADA3 /* CBFile.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA1F26092032136F0070ADA3 /* CBFile.swift */; };
+		FA1F261B2032136F0070ADA3 /* NoteCanvas.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA1F260A2032136F0070ADA3 /* NoteCanvas.swift */; };
+		FA1F261C2032136F0070ADA3 /* Stroke.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA1F260B2032136F0070ADA3 /* Stroke.swift */; };
+		FA1F261D2032136F0070ADA3 /* DocumentCollectionViewCellDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA1F260C2032136F0070ADA3 /* DocumentCollectionViewCellDelegate.swift */; };
+		FA1F261E2032136F0070ADA3 /* CBDocument.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA1F260D2032136F0070ADA3 /* CBDocument.swift */; };
+		FA1F261F2032136F0070ADA3 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA1F260E2032136F0070ADA3 /* SettingsViewController.swift */; };
+		FA1F26202032136F0070ADA3 /* DocumentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA1F260F2032136F0070ADA3 /* DocumentViewController.swift */; };
+		FA1F26212032136F0070ADA3 /* StrokePopUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA1F26102032136F0070ADA3 /* StrokePopUpViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -36,8 +51,6 @@
 /* Begin PBXFileReference section */
 		FA1F25CE203212E50070ADA3 /* collegebook.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = collegebook.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FA1F25D1203212E50070ADA3 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		FA1F25D3203212E50070ADA3 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
-		FA1F25D6203212E50070ADA3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		FA1F25D8203212E50070ADA3 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		FA1F25DB203212E50070ADA3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		FA1F25DD203212E50070ADA3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -47,6 +60,23 @@
 		FA1F25ED203212E60070ADA3 /* collegebookUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = collegebookUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		FA1F25F1203212E60070ADA3 /* collegebookUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = collegebookUITests.swift; sourceTree = "<group>"; };
 		FA1F25F3203212E60070ADA3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		FA1F26002032136E0070ADA3 /* cDocViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = cDocViewController.swift; sourceTree = "<group>"; };
+		FA1F26012032136E0070ADA3 /* NotePadDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotePadDelegate.swift; sourceTree = "<group>"; };
+		FA1F26022032136E0070ADA3 /* StrokePopUpView.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = StrokePopUpView.storyboard; sourceTree = "<group>"; };
+		FA1F26032032136E0070ADA3 /* StrokeSettings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StrokeSettings.swift; sourceTree = "<group>"; };
+		FA1F26042032136E0070ADA3 /* DocumentView.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = DocumentView.storyboard; sourceTree = "<group>"; };
+		FA1F26052032136F0070ADA3 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
+		FA1F26062032136F0070ADA3 /* MainMenuViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainMenuViewController.swift; sourceTree = "<group>"; };
+		FA1F26072032136F0070ADA3 /* SettingsView.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = SettingsView.storyboard; sourceTree = "<group>"; };
+		FA1F26082032136F0070ADA3 /* DocumentCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DocumentCollectionViewCell.swift; sourceTree = "<group>"; };
+		FA1F26092032136F0070ADA3 /* CBFile.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CBFile.swift; sourceTree = "<group>"; };
+		FA1F260A2032136F0070ADA3 /* NoteCanvas.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NoteCanvas.swift; sourceTree = "<group>"; };
+		FA1F260B2032136F0070ADA3 /* Stroke.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Stroke.swift; sourceTree = "<group>"; };
+		FA1F260C2032136F0070ADA3 /* DocumentCollectionViewCellDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DocumentCollectionViewCellDelegate.swift; sourceTree = "<group>"; };
+		FA1F260D2032136F0070ADA3 /* CBDocument.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CBDocument.swift; sourceTree = "<group>"; };
+		FA1F260E2032136F0070ADA3 /* SettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
+		FA1F260F2032136F0070ADA3 /* DocumentViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DocumentViewController.swift; sourceTree = "<group>"; };
+		FA1F26102032136F0070ADA3 /* StrokePopUpViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StrokePopUpViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -97,11 +127,24 @@
 		FA1F25D0203212E50070ADA3 /* collegebook */ = {
 			isa = PBXGroup;
 			children = (
-				FA1F25D1203212E50070ADA3 /* AppDelegate.swift */,
-				FA1F25D3203212E50070ADA3 /* ViewController.swift */,
-				FA1F25D5203212E50070ADA3 /* Main.storyboard */,
-				FA1F25D8203212E50070ADA3 /* Assets.xcassets */,
-				FA1F25DA203212E50070ADA3 /* LaunchScreen.storyboard */,
+				FA1F260D2032136F0070ADA3 /* CBDocument.swift */,
+				FA1F26092032136F0070ADA3 /* CBFile.swift */,
+				FA1F26002032136E0070ADA3 /* cDocViewController.swift */,
+				FA1F26082032136F0070ADA3 /* DocumentCollectionViewCell.swift */,
+				FA1F260C2032136F0070ADA3 /* DocumentCollectionViewCellDelegate.swift */,
+				FA1F26042032136E0070ADA3 /* DocumentView.storyboard */,
+				FA1F260F2032136F0070ADA3 /* DocumentViewController.swift */,
+				FA1F26052032136F0070ADA3 /* Main.storyboard */,
+				FA1F26062032136F0070ADA3 /* MainMenuViewController.swift */,
+				FA1F260A2032136F0070ADA3 /* NoteCanvas.swift */,
+				FA1F26012032136E0070ADA3 /* NotePadDelegate.swift */,
+				FA1F26072032136F0070ADA3 /* SettingsView.storyboard */,
+				FA1F260E2032136F0070ADA3 /* SettingsViewController.swift */,
+				FA1F260B2032136F0070ADA3 /* Stroke.swift */,
+				FA1F26022032136E0070ADA3 /* StrokePopUpView.storyboard */,
+				FA1F26102032136F0070ADA3 /* StrokePopUpViewController.swift */,
+				FA1F26032032136E0070ADA3 /* StrokeSettings.swift */,
+				FA1F25FF203213060070ADA3 /* supportingFiles */,
 				FA1F25DD203212E50070ADA3 /* Info.plist */,
 			);
 			path = collegebook;
@@ -123,6 +166,16 @@
 				FA1F25F3203212E60070ADA3 /* Info.plist */,
 			);
 			path = collegebookUITests;
+			sourceTree = "<group>";
+		};
+		FA1F25FF203213060070ADA3 /* supportingFiles */ = {
+			isa = PBXGroup;
+			children = (
+				FA1F25D1203212E50070ADA3 /* AppDelegate.swift */,
+				FA1F25D8203212E50070ADA3 /* Assets.xcassets */,
+				FA1F25DA203212E50070ADA3 /* LaunchScreen.storyboard */,
+			);
+			path = supportingFiles;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -232,9 +285,12 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FA1F26152032136F0070ADA3 /* DocumentView.storyboard in Resources */,
+				FA1F26162032136F0070ADA3 /* Main.storyboard in Resources */,
 				FA1F25DC203212E50070ADA3 /* LaunchScreen.storyboard in Resources */,
 				FA1F25D9203212E50070ADA3 /* Assets.xcassets in Resources */,
-				FA1F25D7203212E50070ADA3 /* Main.storyboard in Resources */,
+				FA1F26182032136F0070ADA3 /* SettingsView.storyboard in Resources */,
+				FA1F26132032136F0070ADA3 /* StrokePopUpView.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -259,8 +315,20 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				FA1F25D4203212E50070ADA3 /* ViewController.swift in Sources */,
+				FA1F261E2032136F0070ADA3 /* CBDocument.swift in Sources */,
+				FA1F26142032136F0070ADA3 /* StrokeSettings.swift in Sources */,
+				FA1F26172032136F0070ADA3 /* MainMenuViewController.swift in Sources */,
+				FA1F261A2032136F0070ADA3 /* CBFile.swift in Sources */,
 				FA1F25D2203212E50070ADA3 /* AppDelegate.swift in Sources */,
+				FA1F261D2032136F0070ADA3 /* DocumentCollectionViewCellDelegate.swift in Sources */,
+				FA1F261C2032136F0070ADA3 /* Stroke.swift in Sources */,
+				FA1F26212032136F0070ADA3 /* StrokePopUpViewController.swift in Sources */,
+				FA1F26112032136F0070ADA3 /* cDocViewController.swift in Sources */,
+				FA1F26202032136F0070ADA3 /* DocumentViewController.swift in Sources */,
+				FA1F261B2032136F0070ADA3 /* NoteCanvas.swift in Sources */,
+				FA1F26192032136F0070ADA3 /* DocumentCollectionViewCell.swift in Sources */,
+				FA1F26122032136F0070ADA3 /* NotePadDelegate.swift in Sources */,
+				FA1F261F2032136F0070ADA3 /* SettingsViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -296,14 +364,6 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
-		FA1F25D5203212E50070ADA3 /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				FA1F25D6203212E50070ADA3 /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
 		FA1F25DA203212E50070ADA3 /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -433,7 +493,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "com.Alex-Speicher.collegebook";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 2;
 			};
 			name = Debug;
 		};
@@ -448,7 +508,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "com.Alex-Speicher.collegebook";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 2;
 			};
 			name = Release;
 		};
