@@ -27,8 +27,6 @@ class NoteCanvas: UIView {
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
-    var delegate: NotePadDelegate?
     // MARK: - Stroke variables
     var strokeSize: Float = 5.0
     var strokeOpacity: Float = 1.0

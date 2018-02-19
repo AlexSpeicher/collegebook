@@ -88,7 +88,6 @@ class DocumentViewController: UIViewController, UIScrollViewDelegate {
         
         NotePadView = NoteCanvas(frame: initalNoteSize)
         canvasBackground = currentDocumentBackgroundSettings(type: "Ruled", sizeRatio: Float(1.0), backgroundColor: UIColor.white, GuidesColor: UIColor.lightGray)
-        NotePadView.delegate = self
         scrollView.addSubview(NotePadView)
 
         NotePadView.sizeToFit()
@@ -223,12 +222,5 @@ extension DocumentViewController {
         var sizeRatio: Float = 1.0
         var backgroundColor: UIColor = UIColor.groupTableViewBackground
         var GuidesColor: UIColor = UIColor.lightGray
-    }
-}
-
-extension DocumentViewController: NotePadDelegate {
-    func NoteFrameHasChanged(){
-        NotePadView.sizeToFit()
-        scrollView.contentSize = NotePadView.frame.size
     }
 }

@@ -99,7 +99,7 @@ class MainMenuViewController: UIViewController, UICollectionViewDataSource, UICo
         } catch {
             print("Error while enumerating files : \(error.localizedDescription)")
         }
-        emojiCollectionView.reloadData()
+        emojiCollectionView.reloadData() //should only reload when file array changes 
         super.viewWillAppear(animated)
         
     }
