@@ -33,7 +33,10 @@ struct CBFile: Codable {
     init?(json: Data) {
         if let newValue = try? JSONDecoder().decode(CBFile.self, from: json){
             self = newValue
+            print(newValue)
+            print("was able to decode")
         } else {
+            print("was NOT able to decode")
             return nil
         }
     }

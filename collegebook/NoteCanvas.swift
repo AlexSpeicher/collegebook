@@ -37,8 +37,7 @@ class NoteCanvas: UIView {
     var startingPoint: CGPoint!
     
     var lowestYPoint: CGFloat = 0.0
-    let PageHeight = UIScreen.main.bounds.height
-    let PageWidth = UIScreen.main.bounds.width
+
     /*
     override func layoutSubviews() {
         self.clipsToBounds = true

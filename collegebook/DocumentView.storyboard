@@ -72,6 +72,12 @@
                                     <action selector="openGeneralSettings:" destination="9SV-MK-mE2" id="MK2-kl-bMx"/>
                                 </connections>
                             </barButtonItem>
+                            <barButtonItem title="load" id="IzD-tw-gGh">
+                                <color key="tintColor" red="1" green="0.52869961880000005" blue="0.06793819693" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <connections>
+                                    <action selector="load:" destination="9SV-MK-mE2" id="hXG-La-kCC"/>
+                                </connections>
+                            </barButtonItem>
                         </rightBarButtonItems>
                     </navigationItem>
                     <connections>

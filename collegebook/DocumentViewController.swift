@@ -22,12 +22,17 @@ class DocumentViewController: UIViewController, UIScrollViewDelegate {
             return nil
         }
         set {
-            if (cbfile?.Strokes)?[0].isEmpty == false {
+            self.NotePadView.frame = initalNoteSize//CGRect(origin: CGPoint.zero, size: CGSize.zero)
+            self.NotePadView.strokePaths = [[CBFile.Stroke]()]
+            self.NotePadView.index = 0
+            if let Strokes = newValue?.Strokes, let noteSize = newValue?.DocumentCanvasSize {
+            //if (cbfile?.Strokes)!.count > 1 {
                 print("SUCCESS * 2")
-                print(cbfile?.Strokes)
-                self.NotePadView.strokePaths = (cbfile!.Strokes)
-                self.NotePadView.frame = initalNoteSize
+                self.NotePadView.strokePaths = (Strokes)
+                self.NotePadView.frame = CGRect(origin: CGPoint.zero, size: noteSize )
             } else { print("fail")}
+            self.NotePadView.index = self.NotePadView.strokePaths.count - 1
+            self.NotePadView.setNeedsDisplay()
         }
     }
     
@@ -65,6 +70,7 @@ class DocumentViewController: UIViewController, UIScrollViewDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Delete later
+        /*
         if let url = try? FileManager.default.url(
             for: .documentDirectory,
             in: .userDomainMask,
@@ -73,6 +79,7 @@ class DocumentViewController: UIViewController, UIScrollViewDelegate {
             ).appendingPathComponent("Untitled.json") {
                 document = CBDocument(fileURL: url)
             }
+         */
         // Delete later
         
         
@@ -83,7 +90,7 @@ class DocumentViewController: UIViewController, UIScrollViewDelegate {
 
         NotePadView.sizeToFit()
         scrollView.contentSize = NotePadView.frame.size
-
+        
     }
 
     @IBAction func back(_ sender: UIBarButtonItem) {
@@ -116,13 +123,59 @@ class DocumentViewController: UIViewController, UIScrollViewDelegate {
     }
     
     @IBAction func save(_ sender: UIBarButtonItem) {
+        if let json = cbfile?.json {
+            if let url = try? FileManager.default.url(
+                for: .documentDirectory,
+                in: .userDomainMask,
+                appropriateFor: nil,
+                create: true
+                ).appendingPathComponent("Untitled.json") {
+                do {
+                    try json.write(to: url)
+                    print("saved succesfully!")
+                } catch let error {
+                    print("couldn't save \(error)")
+                }
+                
+            }
+        }
+        /*
         document?.cbfile = cbfile
         if document?.cbfile != nil{
             document?.updateChangeCount(.done)
+            //print(cbfile!.Strokes)
+            print(document?.cbfile?.Strokes)
+            print(document?.cbfile?.Strokes.count)
             print("successful save")
         }
+        */
     }
-
+    
+    @IBAction func load(_ sender: UIBarButtonItem) {
+        if let url = try? FileManager.default.url(
+            for: .documentDirectory,
+            in: .userDomainMask,
+            appropriateFor: nil,
+            create: true
+            ).appendingPathComponent("Untitled.json") {
+            if let jsonData = try? Data(contentsOf: url){
+                //let extrafile = CBFile(json: jsonData)
+                //print("EXTRAFILE:",extrafile!)
+                cbfile = CBFile(json: jsonData)
+                //print("CBFILE:",cbfile!)
+            }
+        }
+        /*
+        document?.open { success in
+            if success {
+                self.title =  self.document?.localizedName
+                self.cbfile = self.document?.cbfile
+                print("SUCCESS!!")
+            }
+        }
+        */
+    }
+    
     func onConfirm(_ StrokeSize: Float, _ strokeColorHex: Int, _ strokeOpacity: Float) -> () {
         NotePadView.strokeSize = StrokeSize
         NotePadView.strokeColorHex = strokeColorHex
@@ -137,13 +190,7 @@ class DocumentViewController: UIViewController, UIScrollViewDelegate {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        document?.open { success in
-            if success {
-                self.title =  self.document?.localizedName
-                self.cbfile = self.document?.cbfile
-                print("SUCCESS!!")
-            }
-        }
+        
         /*
         if let url = try? FileManager.default.url(
             for: .documentDirectory,
