@@ -27,6 +27,7 @@
 		FA1F261F2032136F0070ADA3 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA1F260E2032136F0070ADA3 /* SettingsViewController.swift */; };
 		FA1F26202032136F0070ADA3 /* DocumentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA1F260F2032136F0070ADA3 /* DocumentViewController.swift */; };
 		FA1F26212032136F0070ADA3 /* StrokePopUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA1F26102032136F0070ADA3 /* StrokePopUpViewController.swift */; };
+		FA4361C8203B3B16009D0CA6 /* Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA4361C7203B3B16009D0CA6 /* Utilities.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -73,6 +74,7 @@
 		FA1F260E2032136F0070ADA3 /* SettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		FA1F260F2032136F0070ADA3 /* DocumentViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DocumentViewController.swift; sourceTree = "<group>"; };
 		FA1F26102032136F0070ADA3 /* StrokePopUpViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StrokePopUpViewController.swift; sourceTree = "<group>"; };
+		FA4361C7203B3B16009D0CA6 /* Utilities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utilities.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -168,6 +170,7 @@
 				FA1F25D1203212E50070ADA3 /* AppDelegate.swift */,
 				FA1F25D8203212E50070ADA3 /* Assets.xcassets */,
 				FA1F25DA203212E50070ADA3 /* LaunchScreen.storyboard */,
+				FA4361C7203B3B16009D0CA6 /* Utilities.swift */,
 			);
 			path = supportingFiles;
 			sourceTree = "<group>";
@@ -313,6 +316,7 @@
 				FA1F26142032136F0070ADA3 /* StrokeSettings.swift in Sources */,
 				FA1F26172032136F0070ADA3 /* MainMenuViewController.swift in Sources */,
 				FA1F261A2032136F0070ADA3 /* CBFile.swift in Sources */,
+				FA4361C8203B3B16009D0CA6 /* Utilities.swift in Sources */,
 				FA1F25D2203212E50070ADA3 /* AppDelegate.swift in Sources */,
 				FA1F261D2032136F0070ADA3 /* DocumentCollectionViewCellDelegate.swift in Sources */,
 				FA1F26212032136F0070ADA3 /* StrokePopUpViewController.swift in Sources */,

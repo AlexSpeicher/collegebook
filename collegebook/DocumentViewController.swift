@@ -42,6 +42,9 @@ class DocumentViewController: UIViewController, UIScrollViewDelegate {
     
     var document: CBDocument?
     
+    var filenames = [String]()
+    var currentDocumentName: String!
+    
     let initalNoteSize = CGRect(x: CGFloat(0),
                                 y: CGFloat(0),
                                 width: CGFloat(UIScreen.main.bounds.width),
@@ -90,6 +93,7 @@ class DocumentViewController: UIViewController, UIScrollViewDelegate {
 
         NotePadView.sizeToFit()
         scrollView.contentSize = NotePadView.frame.size
+        currentDocumentName = "Untitled".madeUnique(withRespectTo: filenames) + ".json"
         
     }
 
@@ -123,21 +127,27 @@ class DocumentViewController: UIViewController, UIScrollViewDelegate {
     }
     
     @IBAction func save(_ sender: UIBarButtonItem) {
-        if let json = cbfile?.json {
-            if let url = try? FileManager.default.url(
-                for: .documentDirectory,
-                in: .userDomainMask,
-                appropriateFor: nil,
-                create: true
-                ).appendingPathComponent("Untitled.json") {
-                do {
-                    try json.write(to: url)
-                    print("saved succesfully!")
-                } catch let error {
-                    print("couldn't save \(error)")
+        
+        if NotePadView!.strokePaths.count > 1 {
+            print(currentDocumentName) // delete later
+            if let json = cbfile?.json {
+                if let url = try? FileManager.default.url(
+                    for: .documentDirectory,
+                    in: .userDomainMask,
+                    appropriateFor: nil,
+                    create: true
+                    ).appendingPathComponent(currentDocumentName) {
+                    do {
+                        try json.write(to: url)
+                        print("saved succesfully!")
+                    } catch let error {
+                        print("couldn't save \(error)")
+                    }
+                    
                 }
-                
             }
+        } else {
+            print("nothing to save")
         }
         /*
         document?.cbfile = cbfile
@@ -159,12 +169,10 @@ class DocumentViewController: UIViewController, UIScrollViewDelegate {
             create: true
             ).appendingPathComponent("Untitled.json") {
             if let jsonData = try? Data(contentsOf: url){
-                //let extrafile = CBFile(json: jsonData)
-                //print("EXTRAFILE:",extrafile!)
                 cbfile = CBFile(json: jsonData)
-                //print("CBFILE:",cbfile!)
             }
         }
+        currentDocumentName = "Untitled.json"
         /*
         document?.open { success in
             if success {

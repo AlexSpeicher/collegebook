@@ -11,6 +11,9 @@ import UIKit
 class MainMenuViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
     //'I made a change'
     var fileNames = [String]()
+    let fileManager = FileManager.default
+    var documentsURL: URL?
+    
     
     private var lastDocumentViewed: UINavigationController?
     var createDocumentConfirmation: Bool!
@@ -69,8 +72,10 @@ class MainMenuViewController: UIViewController, UICollectionViewDataSource, UICo
     func createNewDoc(){
         let sb = UIStoryboard(name: "DocumentView", bundle: nil)
         let DocummentToBeViewed = sb.instantiateInitialViewController()! as! UINavigationController
+        
+        let documentcontroller = DocummentToBeViewed.viewControllers.first as! DocumentViewController
+        documentcontroller.filenames = fileNames
         lastDocumentViewed = DocummentToBeViewed
-        //print(lastDocumentViewed as Any)
         self.present(DocummentToBeViewed, animated: true)
     }
 
@@ -80,18 +85,23 @@ class MainMenuViewController: UIViewController, UICollectionViewDataSource, UICo
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        let fileManager = FileManager.default
-        let documentsURL = fileManager.urls(for: .documentDirectory, in: .userDomainMask)[0]
+        
+        documentsURL = fileManager.urls(for: .documentDirectory, in: .userDomainMask)[0]
+        // Do any additional setup after loading the view, typically from a nib.
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
         do {
-            let fileURLs = try fileManager.contentsOfDirectory(at: documentsURL, includingPropertiesForKeys: nil) //change back to let later
+            let fileURLs = try fileManager.contentsOfDirectory(at: documentsURL!, includingPropertiesForKeys: nil) //change back to let later
             print(fileURLs)
             fileNames = fileURLs.flatMap({[$0.deletingPathExtension().lastPathComponent]})
             // process files
         } catch {
             print("Error while enumerating files : \(error.localizedDescription)")
         }
-
-        // Do any additional setup after loading the view, typically from a nib.
+        emojiCollectionView.reloadData()
+        super.viewWillAppear(animated)
+        
     }
     
     override func didReceiveMemoryWarning() {
