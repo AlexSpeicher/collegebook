@@ -16,6 +16,7 @@ class MainMenuViewController: UIViewController, UICollectionViewDataSource, UICo
     
     
     private var lastDocumentViewed: UINavigationController?
+    private var _lastViewController: DocumentViewController?
     var createDocumentConfirmation: Bool!
 
     
@@ -70,12 +71,16 @@ class MainMenuViewController: UIViewController, UICollectionViewDataSource, UICo
     }
 
     func createNewDoc(){
+        if lastDocumentViewed != nil {
+            _lastViewController?.close()
+        }
         let sb = UIStoryboard(name: "DocumentView", bundle: nil)
         let DocummentToBeViewed = sb.instantiateInitialViewController()! as! UINavigationController
         
-        let documentcontroller = DocummentToBeViewed.viewControllers.first as! DocumentViewController
-        documentcontroller.filenames = fileNames
+        _lastViewController = DocummentToBeViewed.viewControllers.first as? DocumentViewController
+        _lastViewController?.filenames = fileNames
         lastDocumentViewed = DocummentToBeViewed
+        
         self.present(DocummentToBeViewed, animated: true)
     }
 

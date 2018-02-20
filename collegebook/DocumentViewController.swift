@@ -15,19 +15,17 @@ class DocumentViewController: UIViewController, UIScrollViewDelegate {
     
      var cbfile: CBFile? {
         get {
-            if let Strokes = NotePadView?.strokePaths {
+            if NotePadView.strokePaths.count > 1 {
+                let Strokes = NotePadView.strokePaths
                 let DocumentSize = NotePadView.frame.size
                 return CBFile(Strokes: Strokes, DocumentCanvasSize: DocumentSize)
-            }
-            return nil
+            } else { return nil }
         }
         set {
             self.NotePadView.frame = initalNoteSize//CGRect(origin: CGPoint.zero, size: CGSize.zero)
             self.NotePadView.strokePaths = [[CBFile.Stroke]()]
             self.NotePadView.index = 0
             if let Strokes = newValue?.Strokes, let noteSize = newValue?.DocumentCanvasSize {
-            //if (cbfile?.Strokes)!.count > 1 {
-                print("SUCCESS * 2")
                 self.NotePadView.strokePaths = (Strokes)
                 self.NotePadView.frame = CGRect(origin: CGPoint.zero, size: noteSize )
             } else { print("fail")}
@@ -38,7 +36,7 @@ class DocumentViewController: UIViewController, UIScrollViewDelegate {
     
     //MARK - Storyboard
 
-    var NotePadView:  NoteCanvas!
+    var NotePadView = NoteCanvas()
     
     var document: CBDocument?
     
@@ -66,33 +64,23 @@ class DocumentViewController: UIViewController, UIScrollViewDelegate {
     @IBOutlet weak var scrollView: UIScrollView! {
         didSet {
             scrollView.delegate = self
-            
+            scrollView.addSubview(NotePadView)
         }
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Delete later
-        /*
+        currentDocumentName = "Untitled.json"//"Untitled".madeUnique(withRespectTo: filenames) + ".json"
+        
         if let url = try? FileManager.default.url(
             for: .documentDirectory,
             in: .userDomainMask,
             appropriateFor: nil,
             create: true
-            ).appendingPathComponent("Untitled.json") {
+            ).appendingPathComponent(currentDocumentName) {
                 document = CBDocument(fileURL: url)
-            }
-         */
-        // Delete later
-        
-        
-        NotePadView = NoteCanvas(frame: initalNoteSize)
-        canvasBackground = currentDocumentBackgroundSettings(type: "Ruled", sizeRatio: Float(1.0), backgroundColor: UIColor.white, GuidesColor: UIColor.lightGray)
-        scrollView.addSubview(NotePadView)
-
-        NotePadView.sizeToFit()
-        scrollView.contentSize = NotePadView.frame.size
-        currentDocumentName = "Untitled".madeUnique(withRespectTo: filenames) + ".json"
+        }
+ 
         
     }
 
@@ -127,60 +115,30 @@ class DocumentViewController: UIViewController, UIScrollViewDelegate {
     
     @IBAction func save(_ sender: UIBarButtonItem) {
         
-        if NotePadView!.strokePaths.count > 1 {
-            print(currentDocumentName) // delete later
-            if let json = cbfile?.json {
-                if let url = try? FileManager.default.url(
-                    for: .documentDirectory,
-                    in: .userDomainMask,
-                    appropriateFor: nil,
-                    create: true
-                    ).appendingPathComponent(currentDocumentName) {
-                    do {
-                        try json.write(to: url)
-                        print("saved succesfully!")
-                    } catch let error {
-                        print("couldn't save \(error)")
-                    }
-                    
-                }
+        if NotePadView.strokePaths.count > 1 {
+            document?.cbfile = cbfile
+            if document?.cbfile != nil {
+                document?.updateChangeCount(.done)
+                print("saved succesfully!")
             }
         } else {
             print("nothing to save")
         }
-        /*
-        document?.cbfile = cbfile
-        if document?.cbfile != nil{
-            document?.updateChangeCount(.done)
-            //print(cbfile!.Strokes)
-            print(document?.cbfile?.Strokes)
-            print(document?.cbfile?.Strokes.count)
-            print("successful save")
-        }
-        */
     }
     
     @IBAction func load(_ sender: UIBarButtonItem) {
-        if let url = try? FileManager.default.url(
-            for: .documentDirectory,
-            in: .userDomainMask,
-            appropriateFor: nil,
-            create: true
-            ).appendingPathComponent("Untitled.json") {
-            if let jsonData = try? Data(contentsOf: url){
-                cbfile = CBFile(json: jsonData)
-            }
-        }
-        currentDocumentName = "Untitled.json"
-        /*
         document?.open { success in
             if success {
                 self.title =  self.document?.localizedName
                 self.cbfile = self.document?.cbfile
-                print("SUCCESS!!")
+                print("successful load!")
             }
         }
-        */
+        currentDocumentName = "Untitled.json"
+    }
+    
+    func close(){
+        document?.close()
     }
     
     func onConfirm(_ StrokeSize: Float, _ strokeColorHex: Int, _ strokeOpacity: Float) -> () {
@@ -196,24 +154,12 @@ class DocumentViewController: UIViewController, UIScrollViewDelegate {
     }
     
     override func viewWillAppear(_ animated: Bool) {
+        NotePadView.frame = initalNoteSize
+        canvasBackground = currentDocumentBackgroundSettings(type: "Ruled", sizeRatio: Float(1.0), backgroundColor: UIColor.white, GuidesColor: UIColor.lightGray)
+        NotePadView.sizeToFit()
+        scrollView.contentSize = NotePadView.frame.size
         super.viewWillAppear(animated)
-        
-        /*
-        if let url = try? FileManager.default.url(
-            for: .documentDirectory,
-            in: .userDomainMask,
-            appropriateFor: nil,
-            create: true
-            ).appendingPathComponent("Untitled.json") {
-                if let jsonData = try? Data(contentsOf: url) {
-                    cbDocument = CBDocument(json: jsonData)
-                }
-            
-        }
-        */
     }
-    
-
 }
 
 extension DocumentViewController {
