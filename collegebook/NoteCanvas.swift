@@ -35,6 +35,8 @@ class NoteCanvas: UIView {
     var startingPoint: CGPoint!
     
     var lowestYPoint: CGFloat = 0.0
+    
+    var delegate: DocumentScrollViewDelegate?
 
     /*
     override func layoutSubviews() {
@@ -44,23 +46,38 @@ class NoteCanvas: UIView {
     }
     */
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        strokePaths.append([CBFile.Stroke]())
+        
         let touch = touches.first
-        startingPoint = touch?.location(in: self)
-        index += 1
-        let stroke = CBFile.Stroke(strokePoint: startingPoint, strokeColorHex: strokeColorHex, strokeSize: strokeSize, strokeOpacity: strokeOpacity)
-        strokePaths[index].append(stroke)
-        self.setNeedsDisplay()
+        let isStylus = touch?.type == .stylus
+        if isStylus {
+            delegate?.changeScrolling()
+            strokePaths.append([CBFile.Stroke]())
+            startingPoint = touch?.location(in: self)
+            index += 1
+            let stroke = CBFile.Stroke(strokePoint: startingPoint, strokeColorHex: strokeColorHex, strokeSize: strokeSize, strokeOpacity: strokeOpacity)
+            strokePaths[index].append(stroke)
+            self.setNeedsDisplay()
+        }
  
     }
     
     override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
         let touch = touches.first
-        touchPoint = touch?.location(in: self)
-        let stroke = CBFile.Stroke(strokePoint: touchPoint, strokeColorHex: strokeColorHex, strokeSize: strokeSize, strokeOpacity: strokeOpacity)
-        strokePaths[index].append(stroke)
-        self.setNeedsDisplay()
-        
+        let isStylus = touch?.type == .stylus
+        if isStylus {
+            touchPoint = touch?.location(in: self)
+            let stroke = CBFile.Stroke(strokePoint: touchPoint, strokeColorHex: strokeColorHex, strokeSize: strokeSize, strokeOpacity: strokeOpacity)
+            strokePaths[index].append(stroke)
+            self.setNeedsDisplay()
+        }
+    }
+    
+    override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
+        let touch = touches.first
+        let isStylus = touch?.type == .stylus
+        if isStylus {
+            delegate?.changeScrolling()
+        }
     }
     
     override func draw(_ rect: CGRect) {

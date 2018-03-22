@@ -11,8 +11,13 @@ import UIKit
 class MainMenuViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
     //'I made a change'
     var fileNames = [String]()
+    var fileURLs = [URL]()
     let fileManager = FileManager.default
-    var documentsURL: URL?
+    var documentDirecortyURL: URL?
+    var template: URL?
+    
+    var nextDocumentName: String!
+    var selectionEnabled = false
     
     
     private var lastDocumentViewed: UINavigationController?
@@ -21,17 +26,31 @@ class MainMenuViewController: UIViewController, UICollectionViewDataSource, UICo
 
     
     @IBAction func createNewDocument(_ sender: UIBarButtonItem) {
-        createNewDoc()
+        createNewDocumnet()
     }
     
     @IBAction func returnToLastDocument(_ sender: UIBarButtonItem) {
         openCurrentDoc()
     }
     
+    @IBAction func makeSelection(_ sender: UIBarButtonItem) {
+        selectionEnabled = !selectionEnabled
+        emojiCollectionView.reloadData()
+    }
+    
+    @IBAction func deleteObjects(_ sender: UIBarButtonItem) {
+        do {
+            let lastfile = fileURLs.remove(at: fileURLs.count - 1 )
+            fileNames.remove(at: fileNames.count - 1 )
+            try fileManager.removeItem(at: lastfile)
+            emojiCollectionView.reloadData()
+        } catch {
+            print("Could not delete object: \(error)")
+        }
+    }
     
     @IBOutlet weak var emojiCollectionView: UICollectionView! {
         didSet{
-            
             emojiCollectionView.dataSource = self
             emojiCollectionView.delegate = self
         }
@@ -52,7 +71,7 @@ class MainMenuViewController: UIViewController, UICollectionViewDataSource, UICo
         if let DocumentCell = cell as? DocumentCollectionViewCell {
             DocumentCell.delegate = self
             let text = NSAttributedString(string: fileNames[indexPath.item], attributes: [.font:font])
-            DocumentCell.displayContent(name: text)
+            DocumentCell.displayContent(name: text, mode: selectionEnabled)
             DocumentCell.cellPosition = indexPath.item
             //DocumentCell.label.attributedText = text
         }
@@ -69,16 +88,50 @@ class MainMenuViewController: UIViewController, UICollectionViewDataSource, UICo
             print("last doc not working")
         }
     }
-
-    func createNewDoc(){
+    
+    func presentDocument(at documentURL: URL){
         if lastDocumentViewed != nil {
             _lastViewController?.close()
         }
         let sb = UIStoryboard(name: "DocumentView", bundle: nil)
         let DocummentToBeViewed = sb.instantiateInitialViewController()! as! UINavigationController
+        if let _DocumentViewController = DocummentToBeViewed.viewControllers.first as? DocumentViewController {
+            _DocumentViewController.filenames = fileNames
+            _DocumentViewController.document = CBDocument(fileURL: documentURL)
+        }
+        lastDocumentViewed = DocummentToBeViewed
+        self.present(DocummentToBeViewed, animated: true)
+    }
+
+    func createNewDocumnet(){
         
-        _lastViewController = DocummentToBeViewed.viewControllers.first as? DocumentViewController
-        _lastViewController?.filenames = fileNames
+        /*
+        if let url = try? FileManager.default.url(
+            for: .documentDirectory,
+            in: .userDomainMask,
+            appropriateFor: nil,
+            create: true
+            ).appendingPathComponent(nextDocumentName) {
+            document = CBDocument(fileURL: url)
+        }
+        */
+        
+        if lastDocumentViewed != nil {
+            _lastViewController?.close()
+        }
+        let sb = UIStoryboard(name: "DocumentView", bundle: nil)
+        let DocummentToBeViewed = sb.instantiateInitialViewController()! as! UINavigationController
+        if let _DocumentViewController = DocummentToBeViewed.viewControllers.first as? DocumentViewController {
+            _DocumentViewController.filenames = fileNames
+            if let url = try? FileManager.default.url(
+                for: .documentDirectory,
+                in: .userDomainMask,
+                appropriateFor: nil,
+                create: true
+                ).appendingPathComponent(nextDocumentName) {
+                _DocumentViewController.document = CBDocument(fileURL: url)
+            }
+        }
         lastDocumentViewed = DocummentToBeViewed
         
         self.present(DocummentToBeViewed, animated: true)
@@ -91,20 +144,47 @@ class MainMenuViewController: UIViewController, UICollectionViewDataSource, UICo
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        documentsURL = fileManager.urls(for: .documentDirectory, in: .userDomainMask)[0]
+        documentDirecortyURL = fileManager.urls(for: .documentDirectory, in: .userDomainMask)[0]
+        /*
+        template = try? fileManager.url(
+            for: .applicationSupportDirectory,
+            in: .userDomainMask,
+            appropriateFor: nil,
+            create: true
+        ).appendingPathComponent("Untitled.json")
+        if template != nil {
+            var templateFile = fileManager.createFile(atPath: template!.path, contents: Data())
+        }
+        */
         // Do any additional setup after loading the view, typically from a nib.
     }
     
     override func viewWillAppear(_ animated: Bool) {
+        
         do {
-            let fileURLs = try fileManager.contentsOfDirectory(at: documentsURL!, includingPropertiesForKeys: nil) //change back to let later
-            print(fileURLs)
+            fileURLs = try fileManager.contentsOfDirectory(at: documentDirecortyURL!, includingPropertiesForKeys: nil) //change back to let later
+            //print(fileURLs)
             fileNames = fileURLs.flatMap({[$0.deletingPathExtension().lastPathComponent]})
+            print(fileNames)
             // process files
         } catch {
             print("Error while enumerating files : \(error.localizedDescription)")
         }
-        emojiCollectionView.reloadData() //should only reload when file array changes 
+        nextDocumentName = "Untitled".madeUnique(withRespectTo: fileNames) + ".json"
+        /*
+        template = try? fileManager.url(
+            for: .applicationSupportDirectory,
+            in: .userDomainMask,
+            appropriateFor: nil,
+            create: true
+            ).appendingPathComponent(nextDocumentName)
+        if template != nil {
+            var templateFile = fileManager.createFile(atPath: template!.path, contents: Data())
+        }
+        */
+        
+        
+        emojiCollectionView.reloadData()
         super.viewWillAppear(animated)
         
     }
@@ -118,6 +198,6 @@ class MainMenuViewController: UIViewController, UICollectionViewDataSource, UICo
 
 extension MainMenuViewController: DocumentCollectionViewCellDelegate {
     func openDocument(atIndex: Int) {
-        print(atIndex)
+        presentDocument(at: fileURLs[atIndex])
     }
 }

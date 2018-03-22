@@ -27,6 +27,7 @@
 		FA1F26202032136F0070ADA3 /* DocumentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA1F260F2032136F0070ADA3 /* DocumentViewController.swift */; };
 		FA1F26212032136F0070ADA3 /* StrokePopUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA1F26102032136F0070ADA3 /* StrokePopUpViewController.swift */; };
 		FA4361C8203B3B16009D0CA6 /* Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA4361C7203B3B16009D0CA6 /* Utilities.swift */; };
+		FA837C88206323E20070F1BA /* DocumentScrollViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA837C87206323E20070F1BA /* DocumentScrollViewDelegate.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -73,6 +74,7 @@
 		FA1F260F2032136F0070ADA3 /* DocumentViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DocumentViewController.swift; sourceTree = "<group>"; };
 		FA1F26102032136F0070ADA3 /* StrokePopUpViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StrokePopUpViewController.swift; sourceTree = "<group>"; };
 		FA4361C7203B3B16009D0CA6 /* Utilities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utilities.swift; sourceTree = "<group>"; };
+		FA837C87206323E20070F1BA /* DocumentScrollViewDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DocumentScrollViewDelegate.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -132,6 +134,7 @@
 				FA1F26042032136E0070ADA3 /* DocumentView.storyboard */,
 				FA1F260F2032136F0070ADA3 /* DocumentViewController.swift */,
 				FA1F260A2032136F0070ADA3 /* NoteCanvas.swift */,
+				FA837C87206323E20070F1BA /* DocumentScrollViewDelegate.swift */,
 				FA1F26072032136F0070ADA3 /* SettingsView.storyboard */,
 				FA1F260E2032136F0070ADA3 /* SettingsViewController.swift */,
 				FA1F26022032136E0070ADA3 /* StrokePopUpView.storyboard */,
@@ -321,6 +324,7 @@
 				FA1F261B2032136F0070ADA3 /* NoteCanvas.swift in Sources */,
 				FA1F26192032136F0070ADA3 /* DocumentCollectionViewCell.swift in Sources */,
 				FA1F261F2032136F0070ADA3 /* SettingsViewController.swift in Sources */,
+				FA837C88206323E20070F1BA /* DocumentScrollViewDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

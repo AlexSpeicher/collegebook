@@ -43,6 +43,8 @@ class DocumentViewController: UIViewController, UIScrollViewDelegate {
     var filenames = [String]()
     var currentDocumentName: String!
     
+    var scrollingEnabled = true
+    
     let initalNoteSize = CGRect(x: CGFloat(0),
                                 y: CGFloat(0),
                                 width: CGFloat(UIScreen.main.bounds.width),
@@ -65,13 +67,19 @@ class DocumentViewController: UIViewController, UIScrollViewDelegate {
         didSet {
             scrollView.delegate = self
             scrollView.addSubview(NotePadView)
+            //scrollView.isScrollEnabled = false
+            scrollView.delaysContentTouches = false
+            NotePadView.delegate = self
         }
+       
+        
     }
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
         currentDocumentName = "Untitled.json"//"Untitled".madeUnique(withRespectTo: filenames) + ".json"
-        
+        /*
         if let url = try? FileManager.default.url(
             for: .documentDirectory,
             in: .userDomainMask,
@@ -80,7 +88,7 @@ class DocumentViewController: UIViewController, UIScrollViewDelegate {
             ).appendingPathComponent(currentDocumentName) {
                 document = CBDocument(fileURL: url)
         }
- 
+        */
         
     }
 
@@ -127,14 +135,7 @@ class DocumentViewController: UIViewController, UIScrollViewDelegate {
     }
     
     @IBAction func load(_ sender: UIBarButtonItem) {
-        document?.open { success in
-            if success {
-                self.title =  self.document?.localizedName
-                self.cbfile = self.document?.cbfile
-                print("successful load!")
-            }
-        }
-        currentDocumentName = "Untitled.json"
+        
     }
     
     func close(){
@@ -154,6 +155,14 @@ class DocumentViewController: UIViewController, UIScrollViewDelegate {
     }
     
     override func viewWillAppear(_ animated: Bool) {
+        document?.open { success in
+            if success {
+                self.title =  self.document?.localizedName
+                self.cbfile = self.document?.cbfile
+                print("successful load!")
+            }
+        }
+        currentDocumentName = "Untitled.json"
         NotePadView.frame = initalNoteSize
         canvasBackground = currentDocumentBackgroundSettings(type: "Ruled", sizeRatio: Float(1.0), backgroundColor: UIColor.white, GuidesColor: UIColor.lightGray)
         NotePadView.sizeToFit()
@@ -162,7 +171,13 @@ class DocumentViewController: UIViewController, UIScrollViewDelegate {
     }
 }
 
-extension DocumentViewController {
+extension DocumentViewController: DocumentScrollViewDelegate {
+    func changeScrolling() {
+        scrollingEnabled = !scrollingEnabled
+        print(scrollingEnabled)
+        scrollView.isScrollEnabled = scrollingEnabled
+    }
+    
     struct currentDocumentBackgroundSettings {
         var type: String? = nil
         var sizeRatio: Float = 1.0
@@ -170,3 +185,5 @@ extension DocumentViewController {
         var GuidesColor: UIColor = UIColor.lightGray
     }
 }
+
+

@@ -54,6 +54,16 @@
                                                         <action selector="openFile:" destination="bfV-75-hS1" eventType="touchUpInside" id="b1m-Le-eLW"/>
                                                     </connections>
                                                 </button>
+                                                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MRZ-IG-Zca">
+                                                    <rect key="frame" x="69" y="20" width="41" height="27"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <state key="normal" title="O">
+                                                        <color key="titleColor" red="1" green="0.52869961880000005" blue="0.06793819693" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    </state>
+                                                    <connections>
+                                                        <action selector="selectThisCell:" destination="bfV-75-hS1" eventType="touchUpInside" id="J2M-yF-5mP"/>
+                                                    </connections>
+                                                </button>
                                             </subviews>
                                         </view>
                                         <constraints>
@@ -62,6 +72,7 @@
                                         </constraints>
                                         <connections>
                                             <outlet property="label" destination="ZPe-u9-r8b" id="3nB-vA-8Hm"/>
+                                            <outlet property="selectionIndicator" destination="MRZ-IG-Zca" id="t8A-4e-Ofb"/>
                                         </connections>
                                     </collectionViewCell>
                                 </cells>
@@ -91,6 +102,20 @@
                                 </connections>
                             </barButtonItem>
                         </leftBarButtonItems>
+                        <rightBarButtonItems>
+                            <barButtonItem title="select" id="eok-Uc-RUO">
+                                <color key="tintColor" red="1" green="0.52869961880000005" blue="0.06793819693" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <connections>
+                                    <action selector="makeSelection:" destination="BYZ-38-t0r" id="cZ4-NW-Nt7"/>
+                                </connections>
+                            </barButtonItem>
+                            <barButtonItem systemItem="trash" id="QcI-PW-PUQ">
+                                <color key="tintColor" red="1" green="0.52869961880000005" blue="0.06793819693" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <connections>
+                                    <action selector="deleteObjects:" destination="BYZ-38-t0r" id="Mtd-Cd-G4l"/>
+                                </connections>
+                            </barButtonItem>
+                        </rightBarButtonItems>
                     </navigationItem>
                     <connections>
                         <outlet property="emojiCollectionView" destination="hoE-AR-vO8" id="u3X-dg-9WP"/>

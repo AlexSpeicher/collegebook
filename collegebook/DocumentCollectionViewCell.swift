@@ -10,16 +10,28 @@ import UIKit
 
 class DocumentCollectionViewCell: UICollectionViewCell {
     
+    @IBOutlet weak var selectionIndicator: UIButton!
     @IBOutlet weak var label: UILabel!
     var cellPosition: Int?
+    var selcectionMode: Bool?
     var delegate: DocumentCollectionViewCellDelegate?
     
     @IBAction func openFile(_ sender: UIButton) {
         delegate?.openDocument(atIndex: cellPosition!)
     }
     
-    func displayContent(name: NSAttributedString){
+    @IBAction func selectThisCell(_ sender: UIButton) {
+        print("Hello")
+    }
+    
+    
+    func displayContent(name: NSAttributedString, mode: Bool){
         label.attributedText = name
+        self.selcectionMode = mode
+        selectionIndicator.isHidden = !mode
+        /*if self.selcectionMode == false {
+            
+        }*/
     }
 }
 
