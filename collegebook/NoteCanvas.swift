@@ -31,9 +31,9 @@ class NoteCanvas: UIView {
     var strokeSize: Float = 5.0
     var strokeOpacity: Float = 1.0
     var strokeColorHex: Int = 0x000000
-    var touchPoint: CGPoint!
-    var startingPoint: CGPoint!
     
+    var touchPoint: CGPoint!
+    var touchForce: Float!
     var lowestYPoint: CGFloat = 0.0
     
     var delegate: DocumentScrollViewDelegate?
@@ -46,17 +46,19 @@ class NoteCanvas: UIView {
     }
     */
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        
         let touch = touches.first
         let isStylus = touch?.type == .stylus
         if isStylus {
             delegate?.changeScrolling()
-            strokePaths.append([CBFile.Stroke]())
-            startingPoint = touch?.location(in: self)
-            index += 1
-            let stroke = CBFile.Stroke(strokePoint: startingPoint, strokeColorHex: strokeColorHex, strokeSize: strokeSize, strokeOpacity: strokeOpacity)
-            strokePaths[index].append(stroke)
+            /*
+            touchPoint = touch?.location(in: self)
+            touchForce = Float(touch!.force)
+            let stroke = CBFile.Stroke(strokePoint: touchPoint, strokeColorHex: strokeColorHex, strokeSize: strokeSize * touchForce, strokeOpacity: strokeOpacity)
+            strokePaths[strokePaths.endIndex - 1].append(stroke)
+            print(strokePaths)
             self.setNeedsDisplay()
+            //print(touchForce)
+            */
         }
  
     }
@@ -66,8 +68,9 @@ class NoteCanvas: UIView {
         let isStylus = touch?.type == .stylus
         if isStylus {
             touchPoint = touch?.location(in: self)
-            let stroke = CBFile.Stroke(strokePoint: touchPoint, strokeColorHex: strokeColorHex, strokeSize: strokeSize, strokeOpacity: strokeOpacity)
-            strokePaths[index].append(stroke)
+            touchForce = Float(touch!.force)
+            let stroke = CBFile.Stroke(strokePoint: touchPoint, strokeColorHex: strokeColorHex, strokeSize: strokeSize * touchForce, strokeOpacity: strokeOpacity)
+            strokePaths[strokePaths.endIndex - 1].append(stroke)
             self.setNeedsDisplay()
         }
     }
@@ -76,6 +79,7 @@ class NoteCanvas: UIView {
         let touch = touches.first
         let isStylus = touch?.type == .stylus
         if isStylus {
+            strokePaths.append([CBFile.Stroke]())
             delegate?.changeScrolling()
         }
     }
@@ -95,7 +99,10 @@ class NoteCanvas: UIView {
                 }
                 context!.strokePath()
             }
+            //image = UIGraphicsGetImageFromCurrentImageContext()
         }
+        
+        UIGraphicsEndImageContext()
 
     }
 
@@ -103,7 +110,6 @@ class NoteCanvas: UIView {
         if(index >= 0){
             strokePaths = [[CBFile.Stroke]()]
             self.setNeedsDisplay()
-            index = 0
         }
     }
     
@@ -112,7 +118,6 @@ class NoteCanvas: UIView {
             removedStrokes.append(strokePaths.last!)
             strokePaths.removeLast()//(at: (strokePaths.count - 1))
             self.setNeedsDisplay()
-            index -= 1
         }
     }
     
@@ -121,7 +126,6 @@ class NoteCanvas: UIView {
             strokePaths.append(removedStrokes.last!)
             removedStrokes.removeLast()
             self.setNeedsDisplay()
-            index += 1
         }
     }
 

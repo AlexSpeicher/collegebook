@@ -22,7 +22,7 @@ class DocumentViewController: UIViewController, UIScrollViewDelegate {
             } else { return nil }
         }
         set {
-            self.NotePadView.frame = initalNoteSize//CGRect(origin: CGPoint.zero, size: CGSize.zero)
+            self.NotePadView.frame = initalNoteSize
             self.NotePadView.strokePaths = [[CBFile.Stroke]()]
             self.NotePadView.index = 0
             if let Strokes = newValue?.Strokes, let noteSize = newValue?.DocumentCanvasSize {
@@ -35,8 +35,10 @@ class DocumentViewController: UIViewController, UIScrollViewDelegate {
     }
     
     //MARK - Storyboard
-
+    let usPaperRatio = [1, 1.2916666667]
+    
     var NotePadView = NoteCanvas()
+    var pages = [NoteCanvas]()
     
     var document: CBDocument?
     
@@ -78,6 +80,7 @@ class DocumentViewController: UIViewController, UIScrollViewDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        print("Pages:", pages)
         currentDocumentName = "Untitled.json"//"Untitled".madeUnique(withRespectTo: filenames) + ".json"
         /*
         if let url = try? FileManager.default.url(
@@ -174,7 +177,6 @@ class DocumentViewController: UIViewController, UIScrollViewDelegate {
 extension DocumentViewController: DocumentScrollViewDelegate {
     func changeScrolling() {
         scrollingEnabled = !scrollingEnabled
-        print(scrollingEnabled)
         scrollView.isScrollEnabled = scrollingEnabled
     }
     
