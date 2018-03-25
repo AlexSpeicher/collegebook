@@ -22,20 +22,21 @@ class DocumentViewController: UIViewController, UIScrollViewDelegate {
             } else { return nil }
         }
         set {
-            self.NotePadView.frame = initalNoteSize
+            self.NotePadView.frame = pageSize!
             self.NotePadView.strokePaths = [[CBFile.Stroke]()]
             self.NotePadView.index = 0
             if let Strokes = newValue?.Strokes, let noteSize = newValue?.DocumentCanvasSize {
                 self.NotePadView.strokePaths = (Strokes)
                 self.NotePadView.frame = CGRect(origin: CGPoint.zero, size: noteSize )
-            } else { print("fail")}
+            } else {print("fail")}
             self.NotePadView.index = self.NotePadView.strokePaths.count - 1
             self.NotePadView.setNeedsDisplay()
         }
     }
     
     //MARK - Storyboard
-    let usPaperRatio = [1, 1.2916666667]
+    var usPaperRatio = [1, 1.2916666667]
+    let screenSize = UIScreen.main.bounds
     
     var NotePadView = NoteCanvas()
     var pages = [NoteCanvas]()
@@ -47,10 +48,10 @@ class DocumentViewController: UIViewController, UIScrollViewDelegate {
     
     var scrollingEnabled = true
     
-    let initalNoteSize = CGRect(x: CGFloat(0),
+    var pageSize: CGRect? /* = CGRect(x: CGFloat(0),
                                 y: CGFloat(0),
                                 width: CGFloat(UIScreen.main.bounds.width),
-                                height: CGFloat(UIScreen.main.bounds.height)*2)
+                                height: CGFloat(UIScreen.main.bounds.height)*2)  */
     
     var canvasBackground: currentDocumentBackgroundSettings! {
         didSet {
@@ -73,15 +74,19 @@ class DocumentViewController: UIViewController, UIScrollViewDelegate {
             scrollView.delaysContentTouches = false
             NotePadView.delegate = self
         }
-       
-        
     }
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
         print("Pages:", pages)
-        currentDocumentName = "Untitled.json"//"Untitled".madeUnique(withRespectTo: filenames) + ".json"
+        currentDocumentName = "Untitled.json"
+        
+        let screenWidth = Double(screenSize.width)
+        usPaperRatio = usPaperRatio.map {$0 * screenWidth}
+        pageSize = CGRect(x: 0.0, y: 0.0, width: usPaperRatio[0], height: usPaperRatio[1])
+        
+        //"Untitled".madeUnique(withRespectTo: filenames) + ".json"
         /*
         if let url = try? FileManager.default.url(
             for: .documentDirectory,
@@ -166,7 +171,7 @@ class DocumentViewController: UIViewController, UIScrollViewDelegate {
             }
         }
         currentDocumentName = "Untitled.json"
-        NotePadView.frame = initalNoteSize
+        NotePadView.frame = pageSize!
         canvasBackground = currentDocumentBackgroundSettings(type: "Ruled", sizeRatio: Float(1.0), backgroundColor: UIColor.white, GuidesColor: UIColor.lightGray)
         NotePadView.sizeToFit()
         scrollView.contentSize = NotePadView.frame.size

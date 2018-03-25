@@ -50,15 +50,6 @@ class NoteCanvas: UIView {
         let isStylus = touch?.type == .stylus
         if isStylus {
             delegate?.changeScrolling()
-            /*
-            touchPoint = touch?.location(in: self)
-            touchForce = Float(touch!.force)
-            let stroke = CBFile.Stroke(strokePoint: touchPoint, strokeColorHex: strokeColorHex, strokeSize: strokeSize * touchForce, strokeOpacity: strokeOpacity)
-            strokePaths[strokePaths.endIndex - 1].append(stroke)
-            print(strokePaths)
-            self.setNeedsDisplay()
-            //print(touchForce)
-            */
         }
  
     }
@@ -67,6 +58,7 @@ class NoteCanvas: UIView {
         let touch = touches.first
         let isStylus = touch?.type == .stylus
         if isStylus {
+            
             touchPoint = touch?.location(in: self)
             touchForce = Float(touch!.force)
             let stroke = CBFile.Stroke(strokePoint: touchPoint, strokeColorHex: strokeColorHex, strokeSize: strokeSize * touchForce, strokeOpacity: strokeOpacity)
@@ -89,6 +81,44 @@ class NoteCanvas: UIView {
         
         for path in strokePaths {
             if path.count >= 1 {
+                if path.count == 1 {
+                    context!.beginPath()
+                    context?.move(to: path[0].strokePoint)
+                    context!.setLineWidth(CGFloat(path[0].strokeSize))
+                    context!.setStrokeColor(UIColor(rgb: path[0].strokeColorHex).withAlphaComponent(CGFloat(path[0].strokeOpacity)).cgColor)
+                    context!.setLineCap(.round)
+                    context?.addLine(to: path[0].strokePoint)
+                    context!.strokePath()
+                }
+                else {
+                    for i in 0..<path.count - 1  {
+                        context!.beginPath()
+                        context?.move(to: path[i].strokePoint)
+                        context!.setLineWidth(CGFloat(path[i].strokeSize))
+                        context!.setStrokeColor(UIColor(rgb:path[i].strokeColorHex).withAlphaComponent(CGFloat(path[i].strokeOpacity)).cgColor)
+                        context!.setLineCap(.round)
+                        context?.addLine(to: path[i+1].strokePoint)
+                        context!.strokePath()
+                    }
+                    
+                }
+            }
+            //image = UIGraphicsGetImageFromCurrentImageContext()
+        }
+        UIGraphicsEndImageContext()
+    }
+    
+    
+    
+    
+    
+    
+    /*
+    override func draw(_ rect: CGRect) {
+        let context = UIGraphicsGetCurrentContext()
+        
+        for path in strokePaths {
+            if path.count >= 1 {
                 context!.beginPath()
                 context?.move(to: path[0].strokePoint)
                 for strokes in path{
@@ -101,11 +131,9 @@ class NoteCanvas: UIView {
             }
             //image = UIGraphicsGetImageFromCurrentImageContext()
         }
-        
         UIGraphicsEndImageContext()
-
     }
-
+    */
     func clearCanvas(){
         if(index >= 0){
             strokePaths = [[CBFile.Stroke]()]
@@ -114,17 +142,24 @@ class NoteCanvas: UIView {
     }
     
     func undo(){
+        
         if strokePaths.count > 1{
-            removedStrokes.append(strokePaths.last!)
-            strokePaths.removeLast()//(at: (strokePaths.count - 1))
+            let lastStroke = strokePaths.remove(at: strokePaths.count - 2)
+            removedStrokes.append(lastStroke)
+            //strokePaths.removeLast()
+            //strokePaths.append([CBFile.Stroke]())
             self.setNeedsDisplay()
         }
+        print(strokePaths)
+        
     }
     
     func redo(){
         if removedStrokes.count > 1{
-            strokePaths.append(removedStrokes.last!)
-            removedStrokes.removeLast()
+            strokePaths[strokePaths.count - 1 ] = removedStrokes.removeLast()
+            strokePaths.append([CBFile.Stroke]())
+            //strokePaths.append(removedStrokes.last!)
+            
             self.setNeedsDisplay()
         }
     }
