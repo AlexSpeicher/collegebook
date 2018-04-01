@@ -40,10 +40,12 @@ class DocumentCollectionViewCell: UICollectionViewCell {
     
     
     func displayContent(name: NSAttributedString, mode: Bool){
-        label.attributedText = name
+        self.label.attributedText = name
         self.selcectionMode = mode
         self.selectedMode.text = "◎"
+        self.selectedMode.textColor = UIColor.black
         self.selectedMode.isHidden = !mode
+        self.gotSelected = false
         
         /*if self.selcectionMode == false {
             

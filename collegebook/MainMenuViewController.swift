@@ -12,6 +12,9 @@ class MainMenuViewController: UIViewController, UICollectionViewDataSource, UICo
     //'I made a change'
     var fileNames = [String]()
     var fileURLs = [URL]()
+    var selectedFileUrls = [URL]()
+    
+    
     let fileManager = FileManager.default
     var documentDirecortyURL: URL?
     var currentDirectoryURL = [URL]()
@@ -39,25 +42,39 @@ class MainMenuViewController: UIViewController, UICollectionViewDataSource, UICo
     }
     
     @IBAction func makeSelection(_ sender: UIBarButtonItem) {
+        print(selectedFileUrls.count)
         selectionEnabled = !selectionEnabled
+        if selectionEnabled == false{
+            selectedFileUrls.removeAll()
+        }
         emojiCollectionView.reloadData()
+    }
+    @IBAction func returnToPreviousFolder(_ sender: UIBarButtonItem) {
+        if currentDirectoryURL.count > 1 {
+            currentDirectoryURL.removeLast()
+            loadDirectoryContents()
+        }
     }
     
     @IBAction func deleteObjects(_ sender: UIBarButtonItem) {
-        /*
-        do {
-            
-            let lastfile = fileURLs.remove(at: fileURLs.count - 1 )
-            fileNames.remove(at: fileNames.count - 1 )
-            
-            try fileManager.removeItem(at: lastfile)
-            
-            
-            emojiCollectionView.reloadData()
-        } catch {
-            print("Could not delete object: \(error)")
+        var contentNeedsToBeReloaded = false
+        for i in selectedFileUrls{
+            contentNeedsToBeReloaded = true
+            do {
+                try fileManager.removeItem(at: i)
+                
+                /*
+                if let index = fileURLs.index(of: i){
+                    fileURLs.remove(at: index)
+                }
+                */
+            } catch {
+                print("Could not delete object: \(error)")
+            }
         }
-        */
+        if contentNeedsToBeReloaded {
+            loadDirectoryContents()
+        }
     }
     
     @IBOutlet weak var emojiCollectionView: UICollectionView! {
@@ -144,12 +161,17 @@ class MainMenuViewController: UIViewController, UICollectionViewDataSource, UICo
         let DocummentToBeViewed = sb.instantiateInitialViewController()! as! UINavigationController
         if let _DocumentViewController = DocummentToBeViewed.viewControllers.first as? DocumentViewController {
             _DocumentViewController.filenames = fileNames
+            /*
             if let url = try? FileManager.default.url(
                 for: .documentDirectory,
                 in: .userDomainMask,
                 appropriateFor: nil,
                 create: true
                 ).appendingPathComponent(nextDocumentName) {
+                _DocumentViewController.document = CBDocument(fileURL: url)
+            }
+            */
+            if let url = try? currentDirectoryURL.last!.appendingPathComponent(nextDocumentName) {
                 _DocumentViewController.document = CBDocument(fileURL: url)
             }
         }
@@ -159,19 +181,21 @@ class MainMenuViewController: UIViewController, UICollectionViewDataSource, UICo
     }
     
     func createFolder(){
-        let folderPath = documentDirecortyURL!.appendingPathComponent("Untitled Folder")
+        let folderPath = currentDirectoryURL.last!.appendingPathComponent("Untitled Folder")
+        //let folderPath = documentDirecortyURL!.appendingPathComponent("Untitled Folder")
         do {
             try FileManager.default.createDirectory(at: folderPath, withIntermediateDirectories: false, attributes: nil)
         } catch let error as NSError {
             print(error.localizedDescription);
         }
-        
+        loadDirectoryContents()
         
     }
     
     func loadDirectoryContents(){
         do {
-            fileURLs = try fileManager.contentsOfDirectory(at: documentDirecortyURL!, includingPropertiesForKeys: nil) //change back to let later
+            fileURLs = try fileManager.contentsOfDirectory(at: currentDirectoryURL.last!, includingPropertiesForKeys: nil)
+            //fileURLs = try fileManager.contentsOfDirectory(at: documentDirecortyURL!, includingPropertiesForKeys: nil) //change back to let later
             print(fileURLs)
             print(fileURLs.flatMap({[$0.pathExtension]}))
             fileNames = fileURLs.flatMap({[$0.deletingPathExtension().lastPathComponent]})
@@ -222,16 +246,25 @@ class MainMenuViewController: UIViewController, UICollectionViewDataSource, UICo
 
 extension MainMenuViewController: DocumentCollectionViewCellDelegate {
     func returnObjectPosition(atIndex: Int) {
+        let urlOfFile = fileURLs[atIndex]
         if !selectionEnabled {
-            let urlOfFile = fileURLs[atIndex]
             if urlOfFile.pathExtension == "json" {
                 presentDocument(at: urlOfFile)
             } else if urlOfFile.pathExtension == "" {
                 print("is a folder")
+                currentDirectoryURL.append(urlOfFile)
+                loadDirectoryContents()
             }
         } else {
-            print(atIndex)
-            print(fileNames[atIndex])
+            if selectedFileUrls.contains(urlOfFile){
+                if let index = selectedFileUrls.index(of: urlOfFile){
+                    selectedFileUrls.remove(at: index)
+                }
+            } else {
+                selectedFileUrls.append(urlOfFile)
+            }
+            print(selectedFileUrls)
         }
+        
     }
 }
