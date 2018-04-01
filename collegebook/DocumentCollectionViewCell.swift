@@ -40,7 +40,6 @@ class DocumentCollectionViewCell: UICollectionViewCell {
     
     
     func displayContent(name: NSAttributedString, mode: Bool){
-        let name = NSAttributedString(string: fileURLs[indexPath.item].deletingPathExtension().lastPathComponent, attributes: [.font:font])
         label.attributedText = name
         self.selcectionMode = mode
         self.selectedMode.text = "◎"

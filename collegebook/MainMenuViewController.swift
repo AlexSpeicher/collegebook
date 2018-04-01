@@ -14,6 +14,7 @@ class MainMenuViewController: UIViewController, UICollectionViewDataSource, UICo
     var fileURLs = [URL]()
     let fileManager = FileManager.default
     var documentDirecortyURL: URL?
+    var currentDirectoryURL = [URL]()
     var template: URL?
     
     var nextDocumentName: String!
@@ -90,7 +91,7 @@ class MainMenuViewController: UIViewController, UICollectionViewDataSource, UICo
             
             if let DocumentCell = cell as? DocumentCollectionViewCell {
                 DocumentCell.delegate = self
-                let text = NSAttributedString(string: fileURLs[indexPath.item].deletingPathExtension().lastPathComponent, attributes: [.font:font])
+                let text = NSAttributedString(string: fileNames[indexPath.item], attributes: [.font:font])
                 DocumentCell.displayContent(name: text, mode: selectionEnabled)
                 DocumentCell.cellPosition = indexPath.item
             }
@@ -191,6 +192,7 @@ class MainMenuViewController: UIViewController, UICollectionViewDataSource, UICo
         super.viewDidLoad()
         
         documentDirecortyURL = fileManager.urls(for: .documentDirectory, in: .userDomainMask)[0]
+        currentDirectoryURL.append(documentDirecortyURL!)
         /*
         template = try? fileManager.url(
             for: .applicationSupportDirectory,
@@ -221,7 +223,12 @@ class MainMenuViewController: UIViewController, UICollectionViewDataSource, UICo
 extension MainMenuViewController: DocumentCollectionViewCellDelegate {
     func returnObjectPosition(atIndex: Int) {
         if !selectionEnabled {
-            presentDocument(at: fileURLs[atIndex])
+            let urlOfFile = fileURLs[atIndex]
+            if urlOfFile.pathExtension == "json" {
+                presentDocument(at: urlOfFile)
+            } else if urlOfFile.pathExtension == "" {
+                print("is a folder")
+            }
         } else {
             print(atIndex)
             print(fileNames[atIndex])
