@@ -47,23 +47,19 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="v4g-Yc-ygp">
-                                                    <rect key="frame" x="0.0" y="137" width="120" height="30"/>
+                                                    <rect key="frame" x="0.0" y="52" width="120" height="115"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                    <state key="normal" title="Button"/>
                                                     <connections>
                                                         <action selector="openFile:" destination="bfV-75-hS1" eventType="touchUpInside" id="b1m-Le-eLW"/>
                                                     </connections>
                                                 </button>
-                                                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MRZ-IG-Zca">
-                                                    <rect key="frame" x="69" y="20" width="41" height="27"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="◎" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UyS-lm-xZK">
+                                                    <rect key="frame" x="78" y="10" width="35" height="34"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                    <state key="normal" title="O">
-                                                        <color key="titleColor" red="1" green="0.52869961880000005" blue="0.06793819693" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                    </state>
-                                                    <connections>
-                                                        <action selector="selectThisCell:" destination="bfV-75-hS1" eventType="touchUpInside" id="J2M-yF-5mP"/>
-                                                    </connections>
-                                                </button>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="35"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
                                             </subviews>
                                         </view>
                                         <constraints>
@@ -72,8 +68,16 @@
                                         </constraints>
                                         <connections>
                                             <outlet property="label" destination="ZPe-u9-r8b" id="3nB-vA-8Hm"/>
-                                            <outlet property="selectionIndicator" destination="MRZ-IG-Zca" id="t8A-4e-Ofb"/>
+                                            <outlet property="selectedMode" destination="UyS-lm-xZK" id="fXG-nE-7yL"/>
                                         </connections>
+                                    </collectionViewCell>
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="g0w-vU-uHe">
+                                        <rect key="frame" x="143" y="0.0" width="120" height="180"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
+                                            <rect key="frame" x="0.0" y="0.0" width="120" height="180"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                        </view>
                                     </collectionViewCell>
                                 </cells>
                             </collectionView>
@@ -99,6 +103,12 @@
                                 <color key="tintColor" red="1" green="0.52869961880000005" blue="0.06793819693" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <connections>
                                     <action selector="createNewDocument:" destination="BYZ-38-t0r" id="OxM-go-EmF"/>
+                                </connections>
+                            </barButtonItem>
+                            <barButtonItem title="+ Folder" id="QDL-ys-acG">
+                                <color key="tintColor" red="1" green="0.52869961880000005" blue="0.06793819693" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <connections>
+                                    <action selector="createFolder:" destination="BYZ-38-t0r" id="zeS-bt-4Qp"/>
                                 </connections>
                             </barButtonItem>
                         </leftBarButtonItems>

@@ -10,25 +10,42 @@ import UIKit
 
 class DocumentCollectionViewCell: UICollectionViewCell {
     
-    @IBOutlet weak var selectionIndicator: UIButton!
+
+    @IBOutlet weak var selectedMode: UILabel!
     @IBOutlet weak var label: UILabel!
     var cellPosition: Int?
     var selcectionMode: Bool?
+    var gotSelected = false
+    
     var delegate: DocumentCollectionViewCellDelegate?
     
-    @IBAction func openFile(_ sender: UIButton) {
-        delegate?.openDocument(atIndex: cellPosition!)
+    private var font: UIFont {
+        return UIFontMetrics(forTextStyle: .body).scaledFont(for: UIFont.preferredFont(forTextStyle: .body).withSize(20.0))
     }
     
-    @IBAction func selectThisCell(_ sender: UIButton) {
-        print("Hello")
+    @IBAction func openFile(_ sender: UIButton) {
+        if self.selcectionMode!{
+            if !gotSelected {
+                self.selectedMode.text = "✓"
+                self.selectedMode.textColor = UIColor.orange
+                self.gotSelected = true
+            } else {
+                self.selectedMode.text = "◎"
+                self.selectedMode.textColor = UIColor.black
+                self.gotSelected = false
+            }
+        }
+        delegate?.returnObjectPosition(atIndex: cellPosition!)
     }
     
     
     func displayContent(name: NSAttributedString, mode: Bool){
+        let name = NSAttributedString(string: fileURLs[indexPath.item].deletingPathExtension().lastPathComponent, attributes: [.font:font])
         label.attributedText = name
         self.selcectionMode = mode
-        selectionIndicator.isHidden = !mode
+        self.selectedMode.text = "◎"
+        self.selectedMode.isHidden = !mode
+        
         /*if self.selcectionMode == false {
             
         }*/

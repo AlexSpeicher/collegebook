@@ -29,6 +29,10 @@ class MainMenuViewController: UIViewController, UICollectionViewDataSource, UICo
         createNewDocumnet()
     }
     
+    @IBAction func createFolder(_ sender: UIBarButtonItem) {
+        createFolder()
+    }
+    
     @IBAction func returnToLastDocument(_ sender: UIBarButtonItem) {
         openCurrentDoc()
     }
@@ -39,14 +43,20 @@ class MainMenuViewController: UIViewController, UICollectionViewDataSource, UICo
     }
     
     @IBAction func deleteObjects(_ sender: UIBarButtonItem) {
+        /*
         do {
+            
             let lastfile = fileURLs.remove(at: fileURLs.count - 1 )
             fileNames.remove(at: fileNames.count - 1 )
+            
             try fileManager.removeItem(at: lastfile)
+            
+            
             emojiCollectionView.reloadData()
         } catch {
             print("Could not delete object: \(error)")
         }
+        */
     }
     
     @IBOutlet weak var emojiCollectionView: UICollectionView! {
@@ -62,20 +72,30 @@ class MainMenuViewController: UIViewController, UICollectionViewDataSource, UICo
     
     private var font: UIFont {
         return UIFontMetrics(forTextStyle: .body).scaledFont(for: UIFont.preferredFont(forTextStyle: .body).withSize(20.0))
-        
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "DocumentCell", for: indexPath)
-        
-        if let DocumentCell = cell as? DocumentCollectionViewCell {
-            DocumentCell.delegate = self
-            let text = NSAttributedString(string: fileNames[indexPath.item], attributes: [.font:font])
-            DocumentCell.displayContent(name: text, mode: selectionEnabled)
-            DocumentCell.cellPosition = indexPath.item
-            //DocumentCell.label.attributedText = text
+        if fileURLs[indexPath.item].pathExtension == "json" {
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "DocumentCell", for: indexPath)
+            
+            if let DocumentCell = cell as? DocumentCollectionViewCell {
+                DocumentCell.delegate = self
+                let text = NSAttributedString(string: fileURLs[indexPath.item].deletingPathExtension().lastPathComponent, attributes: [.font:font])
+                DocumentCell.displayContent(name: text, mode: selectionEnabled)
+                DocumentCell.cellPosition = indexPath.item
+            }
+            return cell
+        } else {
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "DocumentCell", for: indexPath)
+            
+            if let DocumentCell = cell as? DocumentCollectionViewCell {
+                DocumentCell.delegate = self
+                let text = NSAttributedString(string: fileURLs[indexPath.item].deletingPathExtension().lastPathComponent, attributes: [.font:font])
+                DocumentCell.displayContent(name: text, mode: selectionEnabled)
+                DocumentCell.cellPosition = indexPath.item
+            }
+            return cell
         }
-        return cell
     }
     
     
@@ -136,6 +156,32 @@ class MainMenuViewController: UIViewController, UICollectionViewDataSource, UICo
         
         self.present(DocummentToBeViewed, animated: true)
     }
+    
+    func createFolder(){
+        let folderPath = documentDirecortyURL!.appendingPathComponent("Untitled Folder")
+        do {
+            try FileManager.default.createDirectory(at: folderPath, withIntermediateDirectories: false, attributes: nil)
+        } catch let error as NSError {
+            print(error.localizedDescription);
+        }
+        
+        
+    }
+    
+    func loadDirectoryContents(){
+        do {
+            fileURLs = try fileManager.contentsOfDirectory(at: documentDirecortyURL!, includingPropertiesForKeys: nil) //change back to let later
+            print(fileURLs)
+            print(fileURLs.flatMap({[$0.pathExtension]}))
+            fileNames = fileURLs.flatMap({[$0.deletingPathExtension().lastPathComponent]})
+            print(fileNames)
+            // process files
+        } catch {
+            print("Error while enumerating files : \(error.localizedDescription)")
+        }
+        nextDocumentName = "Untitled".madeUnique(withRespectTo: fileNames) + ".json"
+        emojiCollectionView.reloadData()
+    }
 
     override var preferredStatusBarStyle: UIStatusBarStyle {
         return .lightContent
@@ -160,31 +206,7 @@ class MainMenuViewController: UIViewController, UICollectionViewDataSource, UICo
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        
-        do {
-            fileURLs = try fileManager.contentsOfDirectory(at: documentDirecortyURL!, includingPropertiesForKeys: nil) //change back to let later
-            //print(fileURLs)
-            fileNames = fileURLs.flatMap({[$0.deletingPathExtension().lastPathComponent]})
-            print(fileNames)
-            // process files
-        } catch {
-            print("Error while enumerating files : \(error.localizedDescription)")
-        }
-        nextDocumentName = "Untitled".madeUnique(withRespectTo: fileNames) + ".json"
-        /*
-        template = try? fileManager.url(
-            for: .applicationSupportDirectory,
-            in: .userDomainMask,
-            appropriateFor: nil,
-            create: true
-            ).appendingPathComponent(nextDocumentName)
-        if template != nil {
-            var templateFile = fileManager.createFile(atPath: template!.path, contents: Data())
-        }
-        */
-        
-        
-        emojiCollectionView.reloadData()
+        loadDirectoryContents()
         super.viewWillAppear(animated)
         
     }
@@ -197,7 +219,12 @@ class MainMenuViewController: UIViewController, UICollectionViewDataSource, UICo
 }
 
 extension MainMenuViewController: DocumentCollectionViewCellDelegate {
-    func openDocument(atIndex: Int) {
-        presentDocument(at: fileURLs[atIndex])
+    func returnObjectPosition(atIndex: Int) {
+        if !selectionEnabled {
+            presentDocument(at: fileURLs[atIndex])
+        } else {
+            print(atIndex)
+            print(fileNames[atIndex])
+        }
     }
 }

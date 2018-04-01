@@ -13,6 +13,8 @@ class NoteCanvas: UIView {
     var removedStrokes = [[CBFile.Stroke]()]
     var index = 0
     
+    var drawnImage: UIImage?
+    
     var background: UIColor? {
         didSet {
             self.backgroundColor = background
@@ -38,13 +40,6 @@ class NoteCanvas: UIView {
     
     var delegate: DocumentScrollViewDelegate?
 
-    /*
-    override func layoutSubviews() {
-        self.clipsToBounds = true
-        self.isMultipleTouchEnabled = false
-        
-    }
-    */
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         let touch = touches.first
         let isStylus = touch?.type == .stylus
@@ -58,11 +53,20 @@ class NoteCanvas: UIView {
         let touch = touches.first
         let isStylus = touch?.type == .stylus
         if isStylus {
+            if let coalescedTouches = event?.coalescedTouches(for: touch!) {
+                for aTouch in coalescedTouches {
+                    touchPoint = aTouch.location(in: self)
+                    touchForce = Float(aTouch.force)
+                    let stroke = CBFile.Stroke(strokePoint: touchPoint, strokeColorHex: strokeColorHex, strokeSize: strokeSize * touchForce, strokeOpacity: strokeOpacity)
+                    strokePaths[strokePaths.endIndex - 1].append(stroke)
+                }
+            } else {
+                touchPoint = touch?.location(in: self)
+                touchForce = Float(touch!.force)
+                let stroke = CBFile.Stroke(strokePoint: touchPoint, strokeColorHex: strokeColorHex, strokeSize: strokeSize * touchForce, strokeOpacity: strokeOpacity)
+                strokePaths[strokePaths.endIndex - 1].append(stroke)
+            }
             
-            touchPoint = touch?.location(in: self)
-            touchForce = Float(touch!.force)
-            let stroke = CBFile.Stroke(strokePoint: touchPoint, strokeColorHex: strokeColorHex, strokeSize: strokeSize * touchForce, strokeOpacity: strokeOpacity)
-            strokePaths[strokePaths.endIndex - 1].append(stroke)
             self.setNeedsDisplay()
         }
     }
@@ -75,6 +79,19 @@ class NoteCanvas: UIView {
             delegate?.changeScrolling()
         }
     }
+    
+    /* Might not be needed 
+    private func drawStroke(context: CGContext!, touch: UITouch) {
+        let previousTouchLocation = touch.previousLocation(in: self)
+        let TouchLocation = touch.location(in: self)
+        let strokeWidth = strokeSize * Float(touch.force)
+        context.setLineWidth(CGFloat(strokeWidth))
+        context!.setLineCap(.round)
+        context.move(to: previousTouchLocation)
+        context.addLine(to: TouchLocation)
+        context.strokePath()
+    }
+    */
     
     override func draw(_ rect: CGRect) {
         let context = UIGraphicsGetCurrentContext()
@@ -105,6 +122,7 @@ class NoteCanvas: UIView {
             }
             //image = UIGraphicsGetImageFromCurrentImageContext()
         }
+        //self.drawnImage = UIGraphicsGetImageFromCurrentImageContext()
         UIGraphicsEndImageContext()
     }
     
