@@ -46,7 +46,6 @@ class NoteCanvas: UIView {
         let isStylus = touch?.type == .stylus
         if isStylus {
             scrollDelegate?.changeScrolling()
-            
         }
  
     }
