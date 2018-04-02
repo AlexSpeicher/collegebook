@@ -41,6 +41,7 @@ class DocumentViewController: UIViewController, UIScrollViewDelegate {
     var NotePadView = NoteCanvas()
     var pages = [NoteCanvas]()
     
+    
     var document: CBDocument?
     
     var filenames = [String]()
@@ -72,7 +73,7 @@ class DocumentViewController: UIViewController, UIScrollViewDelegate {
             scrollView.addSubview(NotePadView)
             //scrollView.isScrollEnabled = false
             scrollView.delaysContentTouches = false
-            NotePadView.delegate = self
+            NotePadView.scrollDelegate = self
         }
     }
     
@@ -85,23 +86,11 @@ class DocumentViewController: UIViewController, UIScrollViewDelegate {
         let screenWidth = Double(screenSize.width)
         usPaperRatio = usPaperRatio.map {$0 * screenWidth}
         pageSize = CGRect(x: 0.0, y: 0.0, width: usPaperRatio[0], height: usPaperRatio[1])
-        
-        //"Untitled".madeUnique(withRespectTo: filenames) + ".json"
-        /*
-        if let url = try? FileManager.default.url(
-            for: .documentDirectory,
-            in: .userDomainMask,
-            appropriateFor: nil,
-            create: true
-            ).appendingPathComponent(currentDocumentName) {
-                document = CBDocument(fileURL: url)
-        }
-        */
-        
     }
 
     @IBAction func back(_ sender: UIBarButtonItem) {
         dismiss(animated: true)
+        close()
     }
     
     @IBAction func undo(_ sender: UIBarButtonItem) {
@@ -128,24 +117,20 @@ class DocumentViewController: UIViewController, UIScrollViewDelegate {
         self.present(settingsPopUp, animated: true)
         settingsPopUp.onSettingsConfirm = onSettingsConfirm
     }
-    
-    @IBAction func save(_ sender: UIBarButtonItem) {
+        
+    func saveChanges(){
         
         if NotePadView.strokePaths.count > 1 {
             document?.cbfile = cbfile
             if document?.cbfile != nil {
                 document?.updateChangeCount(.done)
-                print("saved succesfully!")
+                //print("saved succesfully!")
             }
         } else {
             print("nothing to save")
         }
     }
-    
-    @IBAction func load(_ sender: UIBarButtonItem) {
         
-    }
-    
     func close(){
         document?.close()
     }
@@ -170,19 +155,23 @@ class DocumentViewController: UIViewController, UIScrollViewDelegate {
                 print("successful load!")
             }
         }
-        currentDocumentName = "Untitled.json"
         NotePadView.frame = pageSize!
         canvasBackground = currentDocumentBackgroundSettings(type: "Ruled", sizeRatio: Float(1.0), backgroundColor: UIColor.white, GuidesColor: UIColor.lightGray)
         NotePadView.sizeToFit()
         scrollView.contentSize = NotePadView.frame.size
+        NotePadView.noteDelegate = self
         super.viewWillAppear(animated)
     }
 }
 
-extension DocumentViewController: DocumentScrollViewDelegate {
+extension DocumentViewController: DocumentScrollViewDelegate, NoteCanvasDelegate {
     func changeScrolling() {
         scrollingEnabled = !scrollingEnabled
         scrollView.isScrollEnabled = scrollingEnabled
+    }
+    
+    func noteHasChanged() {
+        saveChanges()
     }
     
     struct currentDocumentBackgroundSettings {

@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		FA010F8E2069A13B00862E93 /* FolderCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA010F8D2069A13B00862E93 /* FolderCollectionViewCell.swift */; };
+		FA0366902072D1B3006F5725 /* NoteCanvasDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA03668F2072D1B3006F5725 /* NoteCanvasDelegate.swift */; };
 		FA1F25D2203212E50070ADA3 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA1F25D1203212E50070ADA3 /* AppDelegate.swift */; };
 		FA1F25D9203212E50070ADA3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FA1F25D8203212E50070ADA3 /* Assets.xcassets */; };
 		FA1F25DC203212E50070ADA3 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FA1F25DA203212E50070ADA3 /* LaunchScreen.storyboard */; };
@@ -50,6 +51,7 @@
 
 /* Begin PBXFileReference section */
 		FA010F8D2069A13B00862E93 /* FolderCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FolderCollectionViewCell.swift; sourceTree = "<group>"; };
+		FA03668F2072D1B3006F5725 /* NoteCanvasDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteCanvasDelegate.swift; sourceTree = "<group>"; };
 		FA1F25CE203212E50070ADA3 /* collegebook.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = collegebook.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FA1F25D1203212E50070ADA3 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		FA1F25D8203212E50070ADA3 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -138,6 +140,7 @@
 				FA1F260F2032136F0070ADA3 /* DocumentViewController.swift */,
 				FA1F260A2032136F0070ADA3 /* NoteCanvas.swift */,
 				FA837C87206323E20070F1BA /* DocumentScrollViewDelegate.swift */,
+				FA03668F2072D1B3006F5725 /* NoteCanvasDelegate.swift */,
 				FA1F26072032136F0070ADA3 /* SettingsView.storyboard */,
 				FA1F260E2032136F0070ADA3 /* SettingsViewController.swift */,
 				FA1F26022032136E0070ADA3 /* StrokePopUpView.storyboard */,
@@ -316,6 +319,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				FA1F261E2032136F0070ADA3 /* CBDocument.swift in Sources */,
+				FA0366902072D1B3006F5725 /* NoteCanvasDelegate.swift in Sources */,
 				FA1F26142032136F0070ADA3 /* StrokeSettings.swift in Sources */,
 				FA1F26172032136F0070ADA3 /* MainMenuViewController.swift in Sources */,
 				FA1F261A2032136F0070ADA3 /* CBFile.swift in Sources */,

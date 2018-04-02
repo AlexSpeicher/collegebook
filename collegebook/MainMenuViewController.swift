@@ -62,12 +62,6 @@ class MainMenuViewController: UIViewController, UICollectionViewDataSource, UICo
             contentNeedsToBeReloaded = true
             do {
                 try fileManager.removeItem(at: i)
-                
-                /*
-                if let index = fileURLs.index(of: i){
-                    fileURLs.remove(at: index)
-                }
-                */
             } catch {
                 print("Could not delete object: \(error)")
             }
@@ -142,18 +136,6 @@ class MainMenuViewController: UIViewController, UICollectionViewDataSource, UICo
     }
 
     func createNewDocumnet(){
-        
-        /*
-        if let url = try? FileManager.default.url(
-            for: .documentDirectory,
-            in: .userDomainMask,
-            appropriateFor: nil,
-            create: true
-            ).appendingPathComponent(nextDocumentName) {
-            document = CBDocument(fileURL: url)
-        }
-        */
-        
         if lastDocumentViewed != nil {
             _lastViewController?.close()
         }
@@ -161,17 +143,9 @@ class MainMenuViewController: UIViewController, UICollectionViewDataSource, UICo
         let DocummentToBeViewed = sb.instantiateInitialViewController()! as! UINavigationController
         if let _DocumentViewController = DocummentToBeViewed.viewControllers.first as? DocumentViewController {
             _DocumentViewController.filenames = fileNames
-            /*
-            if let url = try? FileManager.default.url(
-                for: .documentDirectory,
-                in: .userDomainMask,
-                appropriateFor: nil,
-                create: true
-                ).appendingPathComponent(nextDocumentName) {
-                _DocumentViewController.document = CBDocument(fileURL: url)
-            }
-            */
+
             if let url = try? currentDirectoryURL.last!.appendingPathComponent(nextDocumentName) {
+                fileManager.createFile(atPath: url.path, contents: Data())
                 _DocumentViewController.document = CBDocument(fileURL: url)
             }
         }
@@ -217,17 +191,6 @@ class MainMenuViewController: UIViewController, UICollectionViewDataSource, UICo
         
         documentDirecortyURL = fileManager.urls(for: .documentDirectory, in: .userDomainMask)[0]
         currentDirectoryURL.append(documentDirecortyURL!)
-        /*
-        template = try? fileManager.url(
-            for: .applicationSupportDirectory,
-            in: .userDomainMask,
-            appropriateFor: nil,
-            create: true
-        ).appendingPathComponent("Untitled.json")
-        if template != nil {
-            var templateFile = fileManager.createFile(atPath: template!.path, contents: Data())
-        }
-        */
         // Do any additional setup after loading the view, typically from a nib.
     }
     

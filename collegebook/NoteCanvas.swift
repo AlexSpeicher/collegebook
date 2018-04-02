@@ -38,13 +38,15 @@ class NoteCanvas: UIView {
     var touchForce: Float!
     var lowestYPoint: CGFloat = 0.0
     
-    var delegate: DocumentScrollViewDelegate?
+    var scrollDelegate: DocumentScrollViewDelegate?
+    var noteDelegate: NoteCanvasDelegate?
 
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         let touch = touches.first
         let isStylus = touch?.type == .stylus
         if isStylus {
-            delegate?.changeScrolling()
+            scrollDelegate?.changeScrolling()
+            
         }
  
     }
@@ -76,7 +78,9 @@ class NoteCanvas: UIView {
         let isStylus = touch?.type == .stylus
         if isStylus {
             strokePaths.append([CBFile.Stroke]())
-            delegate?.changeScrolling()
+            noteDelegate?.noteHasChanged()
+            scrollDelegate?.changeScrolling()
+            
         }
     }
     
@@ -120,38 +124,10 @@ class NoteCanvas: UIView {
                     
                 }
             }
-            //image = UIGraphicsGetImageFromCurrentImageContext()
-        }
-        //self.drawnImage = UIGraphicsGetImageFromCurrentImageContext()
-        UIGraphicsEndImageContext()
-    }
-    
-    
-    
-    
-    
-    
-    /*
-    override func draw(_ rect: CGRect) {
-        let context = UIGraphicsGetCurrentContext()
-        
-        for path in strokePaths {
-            if path.count >= 1 {
-                context!.beginPath()
-                context?.move(to: path[0].strokePoint)
-                for strokes in path{
-                    context!.setLineWidth(CGFloat(strokes.strokeSize))
-                    context!.setStrokeColor(UIColor(rgb: strokes.strokeColorHex).withAlphaComponent(CGFloat(strokes.strokeOpacity)).cgColor)
-                    context!.setLineCap(.round)
-                    context?.addLine(to: strokes.strokePoint)
-                }
-                context!.strokePath()
-            }
-            //image = UIGraphicsGetImageFromCurrentImageContext()
         }
         UIGraphicsEndImageContext()
     }
-    */
+    
     func clearCanvas(){
         if(index >= 0){
             strokePaths = [[CBFile.Stroke]()]
@@ -167,9 +143,8 @@ class NoteCanvas: UIView {
             //strokePaths.removeLast()
             //strokePaths.append([CBFile.Stroke]())
             self.setNeedsDisplay()
+            noteDelegate?.noteHasChanged()
         }
-        print(strokePaths)
-        
     }
     
     func redo(){
@@ -179,6 +154,7 @@ class NoteCanvas: UIView {
             //strokePaths.append(removedStrokes.last!)
             
             self.setNeedsDisplay()
+            noteDelegate?.noteHasChanged()
         }
     }
 
