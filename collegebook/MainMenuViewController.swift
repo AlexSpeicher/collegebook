@@ -95,6 +95,19 @@ class MainMenuViewController: UIViewController, UICollectionViewDataSource, UICo
                 let text = NSAttributedString(string: fileURLs[indexPath.item].deletingPathExtension().lastPathComponent, attributes: [.font:font])
                 DocumentCell.displayContent(name: text, mode: selectionEnabled)
                 DocumentCell.cellPosition = indexPath.item
+                DocumentCell.thumbnail.image = UIImage(named: "DocThumb")
+                /*
+                do {
+                    print("finding thumbnail")
+                    var thumbnailDictionary: AnyObject?
+                    let nsurl = fileURLs[indexPath.item] as NSURL
+                    try nsurl.getPromisedItemResourceValue(&thumbnailDictionary, forKey: URLResourceKey.thumbnailDictionaryKey)
+                    DocumentCell.thumbnail.image = thumbnailDictionary?[URLThumbnailDictionaryItem.NSThumbnail1024x1024SizeKey] as? UIImage
+                } catch {
+                    print("couldn't find thumbnail")
+                    DocumentCell.thumbnail.image = nil
+                }
+                */
             }
             return cell
         } else {
@@ -105,6 +118,7 @@ class MainMenuViewController: UIViewController, UICollectionViewDataSource, UICo
                 let text = NSAttributedString(string: fileNames[indexPath.item], attributes: [.font:font])
                 DocumentCell.displayContent(name: text, mode: selectionEnabled)
                 DocumentCell.cellPosition = indexPath.item
+                DocumentCell.thumbnail.image = UIImage(named: "DocFolder")
             }
             return cell
         }
@@ -170,10 +184,10 @@ class MainMenuViewController: UIViewController, UICollectionViewDataSource, UICo
         do {
             fileURLs = try fileManager.contentsOfDirectory(at: currentDirectoryURL.last!, includingPropertiesForKeys: nil)
             //fileURLs = try fileManager.contentsOfDirectory(at: documentDirecortyURL!, includingPropertiesForKeys: nil) //change back to let later
-            print(fileURLs)
-            print(fileURLs.flatMap({[$0.pathExtension]}))
+            //print(fileURLs)
+            //print(fileURLs.flatMap({[$0.pathExtension]}))
             fileNames = fileURLs.flatMap({[$0.deletingPathExtension().lastPathComponent]})
-            print(fileNames)
+            //print(fileNames)
             // process files
         } catch {
             print("Error while enumerating files : \(error.localizedDescription)")
@@ -210,11 +224,23 @@ class MainMenuViewController: UIViewController, UICollectionViewDataSource, UICo
 extension MainMenuViewController: DocumentCollectionViewCellDelegate {
     func returnObjectPosition(atIndex: Int) {
         let urlOfFile = fileURLs[atIndex]
+        
+        /*
+        do {
+            let resources = try urlOfFile.resourceValues(forKeys:[.fileSizeKey])
+            let fileSize = resources.fileSize!
+            print ("\(fileSize)")
+        } catch {
+            print("Error: \(error)")
+        }
+        */
+        
+        
         if !selectionEnabled {
             if urlOfFile.pathExtension == "json" {
                 presentDocument(at: urlOfFile)
             } else if urlOfFile.pathExtension == "" {
-                print("is a folder")
+                //print("is a folder")
                 currentDirectoryURL.append(urlOfFile)
                 loadDirectoryContents()
             }
@@ -226,7 +252,7 @@ extension MainMenuViewController: DocumentCollectionViewCellDelegate {
             } else {
                 selectedFileUrls.append(urlOfFile)
             }
-            print(selectedFileUrls)
+            //print(selectedFileUrls)
         }
         
     }

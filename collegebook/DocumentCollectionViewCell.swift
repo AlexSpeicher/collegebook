@@ -11,6 +11,11 @@ import UIKit
 class DocumentCollectionViewCell: UICollectionViewCell {
     
 
+    @IBOutlet weak var thumbnail: UIImageView! {
+        didSet{
+            print("thumbnail has been set")
+        }
+    }
     @IBOutlet weak var selectedMode: UILabel!
     @IBOutlet weak var label: UILabel!
     var cellPosition: Int?

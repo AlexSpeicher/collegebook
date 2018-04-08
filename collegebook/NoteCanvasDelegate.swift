@@ -10,4 +10,5 @@ import Foundation
 
 protocol NoteCanvasDelegate {
     func noteHasChanged()
+    func changeNoteFrame()
 }

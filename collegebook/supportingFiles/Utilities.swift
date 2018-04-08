@@ -21,3 +21,14 @@ extension String {
         return possiblyUnique
     }
 }
+//  Created by CS193p Instructor.
+//  Copyright © 2017 Stanford University. All rights reserved.
+extension UIView {
+    var snapshot: UIImage? {
+        UIGraphicsBeginImageContext(bounds.size)
+        drawHierarchy(in: bounds, afterScreenUpdates: true)
+        let image = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        return image
+    }
+}

@@ -36,8 +36,11 @@ class NoteCanvas: UIView {
     
     var touchPoint: CGPoint!
     var touchForce: Float!
-    var lowestYPoint: CGFloat = 0.0
     
+    var lowestYPoint: CGFloat = 0.0
+    var onePageLength: CGFloat?
+    
+    var lowestTouchPoint = CGPoint(x: 0.0, y: 0.0)//CGPoint?
     var scrollDelegate: DocumentScrollViewDelegate?
     var noteDelegate: NoteCanvasDelegate?
 
@@ -60,12 +63,22 @@ class NoteCanvas: UIView {
                     touchForce = Float(aTouch.force)
                     let stroke = CBFile.Stroke(strokePoint: touchPoint, strokeColorHex: strokeColorHex, strokeSize: strokeSize * touchForce, strokeOpacity: strokeOpacity)
                     strokePaths[strokePaths.endIndex - 1].append(stroke)
+                    
+                    let y = touchPoint.y
+                    if y > lowestYPoint{
+                        lowestYPoint = y
+                    }
                 }
             } else {
                 touchPoint = touch?.location(in: self)
                 touchForce = Float(touch!.force)
                 let stroke = CBFile.Stroke(strokePoint: touchPoint, strokeColorHex: strokeColorHex, strokeSize: strokeSize * touchForce, strokeOpacity: strokeOpacity)
                 strokePaths[strokePaths.endIndex - 1].append(stroke)
+                
+                let y = touchPoint.y
+                if y > lowestYPoint{
+                    lowestYPoint = y
+                }
             }
             
             self.setNeedsDisplay()
@@ -76,10 +89,15 @@ class NoteCanvas: UIView {
         let touch = touches.first
         let isStylus = touch?.type == .stylus
         if isStylus {
+            
+            let spaceLeft = self.frame.maxY - lowestYPoint
+            if spaceLeft < onePageLength! {
+                noteDelegate?.changeNoteFrame()
+            }
+            
             strokePaths.append([CBFile.Stroke]())
             noteDelegate?.noteHasChanged()
             scrollDelegate?.changeScrolling()
-            
         }
     }
     

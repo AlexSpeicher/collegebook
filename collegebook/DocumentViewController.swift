@@ -28,6 +28,7 @@ class DocumentViewController: UIViewController, UIScrollViewDelegate {
             if let Strokes = newValue?.Strokes, let noteSize = newValue?.DocumentCanvasSize {
                 self.NotePadView.strokePaths = (Strokes)
                 self.NotePadView.frame = CGRect(origin: CGPoint.zero, size: noteSize )
+                scrollView.contentSize = NotePadView.frame.size
             } else {print("fail")}
             self.NotePadView.index = self.NotePadView.strokePaths.count - 1
             self.NotePadView.setNeedsDisplay()
@@ -49,10 +50,7 @@ class DocumentViewController: UIViewController, UIScrollViewDelegate {
     
     var scrollingEnabled = true
     
-    var pageSize: CGRect? /* = CGRect(x: CGFloat(0),
-                                y: CGFloat(0),
-                                width: CGFloat(UIScreen.main.bounds.width),
-                                height: CGFloat(UIScreen.main.bounds.height)*2)  */
+    var pageSize: CGRect? 
     
     var canvasBackground: currentDocumentBackgroundSettings! {
         didSet {
@@ -89,8 +87,10 @@ class DocumentViewController: UIViewController, UIScrollViewDelegate {
     }
 
     @IBAction func back(_ sender: UIBarButtonItem) {
-        dismiss(animated: true)
-        close()
+        document?.thumbnail = NotePadView.snapshot
+        dismiss(animated: true) {
+            self.close()
+        }
     }
     
     @IBAction func undo(_ sender: UIBarButtonItem) {
@@ -155,7 +155,9 @@ class DocumentViewController: UIViewController, UIScrollViewDelegate {
                 print("successful load!")
             }
         }
+        
         NotePadView.frame = pageSize!
+        NotePadView.onePageLength = pageSize!.maxY
         canvasBackground = currentDocumentBackgroundSettings(type: "Ruled", sizeRatio: Float(1.0), backgroundColor: UIColor.white, GuidesColor: UIColor.lightGray)
         NotePadView.sizeToFit()
         scrollView.contentSize = NotePadView.frame.size
@@ -165,6 +167,12 @@ class DocumentViewController: UIViewController, UIScrollViewDelegate {
 }
 
 extension DocumentViewController: DocumentScrollViewDelegate, NoteCanvasDelegate {
+    func changeNoteFrame() {
+        NotePadView.frame = CGRect(x: 0.0, y: 0.0, width: usPaperRatio[0], height: Double(NotePadView.frame.maxY) + usPaperRatio[1] )
+        scrollView.contentSize = NotePadView.frame.size
+        print("Increase Frame Size")
+    }
+    
     func changeScrolling() {
         scrollingEnabled = !scrollingEnabled
         scrollView.isScrollEnabled = scrollingEnabled

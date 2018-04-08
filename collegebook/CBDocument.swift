@@ -11,6 +11,7 @@ import UIKit
 class CBDocument: UIDocument {
     
     var cbfile: CBFile?
+    var thumbnail: UIImage? 
     
     override func contents(forType typeName: String) throws -> Any {
         return cbfile?.json ?? Data()
@@ -22,5 +23,11 @@ class CBDocument: UIDocument {
         }
     }
     
-    
+    override func fileAttributesToWrite(to url: URL, for saveOperation: UIDocumentSaveOperation) throws -> [AnyHashable : Any] {
+        var attributes = try super.fileAttributesToWrite(to: url, for: saveOperation)
+        if let thumbnail = self.thumbnail {
+            attributes[URLResourceKey.thumbnailDictionaryKey] = [URLThumbnailDictionaryItem.NSThumbnail1024x1024SizeKey:thumbnail]
+        }
+        return attributes
+    }
 }
