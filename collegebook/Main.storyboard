@@ -93,6 +93,23 @@
                                     </collectionViewCell>
                                 </cells>
                             </collectionView>
+                            <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="4vM-a2-jLN">
+                                <rect key="frame" x="0.0" y="1068" width="834" height="44"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
+                                <items>
+                                    <barButtonItem systemItem="trash" id="QcI-PW-PUQ">
+                                        <color key="tintColor" red="1" green="0.52869961880000005" blue="0.06793819693" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <connections>
+                                            <action selector="deleteObjects:" destination="BYZ-38-t0r" id="Mtd-Cd-G4l"/>
+                                        </connections>
+                                    </barButtonItem>
+                                    <barButtonItem title="Rename" id="iXJ-en-cVo">
+                                        <color key="tintColor" red="1" green="0.52869961880000005" blue="0.06793819693" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    </barButtonItem>
+                                    <barButtonItem width="42" style="plain" systemItem="fixedSpace" id="vPS-2c-oNm"/>
+                                </items>
+                                <color key="barTintColor" red="0.236828702" green="0.23917354060000001" blue="0.23917354060000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            </toolbar>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
@@ -130,23 +147,16 @@
                                 </connections>
                             </barButtonItem>
                         </leftBarButtonItems>
-                        <rightBarButtonItems>
-                            <barButtonItem title="select" id="eok-Uc-RUO">
-                                <color key="tintColor" red="1" green="0.52869961880000005" blue="0.06793819693" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <connections>
-                                    <action selector="makeSelection:" destination="BYZ-38-t0r" id="cZ4-NW-Nt7"/>
-                                </connections>
-                            </barButtonItem>
-                            <barButtonItem systemItem="trash" id="QcI-PW-PUQ">
-                                <color key="tintColor" red="1" green="0.52869961880000005" blue="0.06793819693" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <connections>
-                                    <action selector="deleteObjects:" destination="BYZ-38-t0r" id="Mtd-Cd-G4l"/>
-                                </connections>
-                            </barButtonItem>
-                        </rightBarButtonItems>
+                        <barButtonItem key="rightBarButtonItem" title="select" id="eok-Uc-RUO">
+                            <color key="tintColor" red="1" green="0.52869961880000005" blue="0.06793819693" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <connections>
+                                <action selector="makeSelection:" destination="BYZ-38-t0r" id="cZ4-NW-Nt7"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <connections>
                         <outlet property="emojiCollectionView" destination="hoE-AR-vO8" id="u3X-dg-9WP"/>
+                        <outlet property="toolbar" destination="4vM-a2-jLN" id="YqH-V9-OHi"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>

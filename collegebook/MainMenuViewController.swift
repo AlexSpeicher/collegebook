@@ -20,8 +20,19 @@ class MainMenuViewController: UIViewController, UICollectionViewDataSource, UICo
     var currentDirectoryURL = [URL]()
     var template: URL?
     
+    @IBOutlet weak var toolbar: UIToolbar!
+    
     var nextDocumentName: String!
-    var selectionEnabled = false
+    var selectionEnabled = false {
+        didSet {
+            if selectionEnabled == false {
+                toolbar.isHidden = true
+            }
+            else {
+                toolbar.isHidden = false
+            }
+        }
+    }
     
     
     private var lastDocumentViewed: UINavigationController?
@@ -209,6 +220,7 @@ class MainMenuViewController: UIViewController, UICollectionViewDataSource, UICo
     }
     
     override func viewWillAppear(_ animated: Bool) {
+        toolbar.isHidden = true
         loadDirectoryContents()
         super.viewWillAppear(animated)
         
