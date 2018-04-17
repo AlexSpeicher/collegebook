@@ -13,7 +13,7 @@ class NoteCanvas: UIView {
     var removedStrokes = [[CBFile.Stroke]()]
     var index = 0
     
-    var drawnImage: UIImage?
+    var drawingImage: UIImage?
     
     var background: UIColor? {
         didSet {
@@ -57,6 +57,10 @@ class NoteCanvas: UIView {
         let touch = touches.first
         let isStylus = touch?.type == .stylus
         if isStylus {
+            
+            //UIGraphicsBeginImageContextWithOptions(bounds.size, false, 0.0)
+            //let context = UIGraphicsGetCurrentContext()
+            
             if let coalescedTouches = event?.coalescedTouches(for: touch!) {
                 for aTouch in coalescedTouches {
                     touchPoint = aTouch.location(in: self)
@@ -80,7 +84,17 @@ class NoteCanvas: UIView {
                     lowestYPoint = y
                 }
             }
+            //drawLastStroke(context: context, strokes: strokePaths[strokePaths.endIndex - 1])
             
+            //self.drawingImage = UIGraphicsGetImageFromCurrentImageContext()
+            
+            //let imageView = UIImageView(image: drawingImage!)
+            
+            //imageView.frame = CGRect(x: 0, y: 0, width: drawingImage!.size.width, height: drawingImage!.size.height)
+            //drawingImage?.draw(in: bounds)
+            //self.addSubview(imageView)
+            
+            //UIGraphicsEndImageContext()
             self.setNeedsDisplay()
         }
     }
@@ -98,6 +112,30 @@ class NoteCanvas: UIView {
             strokePaths.append([CBFile.Stroke]())
             noteDelegate?.noteHasChanged()
             scrollDelegate?.changeScrolling()
+        }
+    }
+    
+    func drawLastStroke(context: CGContext!, strokes: [CBFile.Stroke]) {
+        if strokes.count == 1 {
+            context!.beginPath()
+            context?.move(to: strokes[0].strokePoint)
+            context!.setLineWidth(CGFloat(strokes[0].strokeSize))
+            context!.setStrokeColor(UIColor(rgb: strokes[0].strokeColorHex).withAlphaComponent(CGFloat(strokes[0].strokeOpacity)).cgColor)
+            context!.setLineCap(.round)
+            context?.addLine(to: strokes[0].strokePoint)
+            context!.strokePath()
+        }
+        else {
+            for i in 0..<strokes.count - 1  {
+                context!.beginPath()
+                context?.move(to: strokes[i].strokePoint)
+                context!.setLineWidth(CGFloat(strokes[i].strokeSize))
+                context!.setStrokeColor(UIColor(rgb:strokes[i].strokeColorHex).withAlphaComponent(CGFloat(strokes[i].strokeOpacity)).cgColor)
+                context!.setLineCap(.round)
+                context?.addLine(to: strokes[i+1].strokePoint)
+                context!.strokePath()
+            }
+            
         }
     }
     

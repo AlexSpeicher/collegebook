@@ -20,7 +20,7 @@ class MainMenuViewController: UIViewController, UICollectionViewDataSource, UICo
     var currentDirectoryURL = [URL]()
     var template: URL?
     
-    @IBOutlet weak var toolbar: UIToolbar!
+  
     
     var nextDocumentName: String!
     var selectionEnabled = false {
@@ -81,6 +81,10 @@ class MainMenuViewController: UIViewController, UICollectionViewDataSource, UICo
             loadDirectoryContents()
         }
     }
+    
+    //MARK: - Outlets
+    
+    @IBOutlet weak var toolbar: UIToolbar!
     
     @IBOutlet weak var emojiCollectionView: UICollectionView! {
         didSet{
