@@ -28,6 +28,8 @@
 		FA1F261F2032136F0070ADA3 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA1F260E2032136F0070ADA3 /* SettingsViewController.swift */; };
 		FA1F26202032136F0070ADA3 /* DocumentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA1F260F2032136F0070ADA3 /* DocumentViewController.swift */; };
 		FA1F26212032136F0070ADA3 /* StrokePopUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA1F26102032136F0070ADA3 /* StrokePopUpViewController.swift */; };
+		FA2FC134208584F400361FEE /* RenameView.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FA2FC133208584F400361FEE /* RenameView.storyboard */; };
+		FA2FC1382086457800361FEE /* RenameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA2FC1372086457800361FEE /* RenameViewController.swift */; };
 		FA4361C8203B3B16009D0CA6 /* Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA4361C7203B3B16009D0CA6 /* Utilities.swift */; };
 		FA837C88206323E20070F1BA /* DocumentScrollViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA837C87206323E20070F1BA /* DocumentScrollViewDelegate.swift */; };
 /* End PBXBuildFile section */
@@ -77,6 +79,8 @@
 		FA1F260E2032136F0070ADA3 /* SettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		FA1F260F2032136F0070ADA3 /* DocumentViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DocumentViewController.swift; sourceTree = "<group>"; };
 		FA1F26102032136F0070ADA3 /* StrokePopUpViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StrokePopUpViewController.swift; sourceTree = "<group>"; };
+		FA2FC133208584F400361FEE /* RenameView.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = RenameView.storyboard; sourceTree = "<group>"; };
+		FA2FC1372086457800361FEE /* RenameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RenameViewController.swift; sourceTree = "<group>"; };
 		FA4361C7203B3B16009D0CA6 /* Utilities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utilities.swift; sourceTree = "<group>"; };
 		FA837C87206323E20070F1BA /* DocumentScrollViewDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DocumentScrollViewDelegate.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -146,6 +150,8 @@
 				FA1F26022032136E0070ADA3 /* StrokePopUpView.storyboard */,
 				FA1F26102032136F0070ADA3 /* StrokePopUpViewController.swift */,
 				FA1F26032032136E0070ADA3 /* StrokeSettings.swift */,
+				FA2FC133208584F400361FEE /* RenameView.storyboard */,
+				FA2FC1372086457800361FEE /* RenameViewController.swift */,
 				FA1F25FF203213060070ADA3 /* supportingFiles */,
 				FA1F25DD203212E50070ADA3 /* Info.plist */,
 			);
@@ -291,6 +297,7 @@
 				FA1F26152032136F0070ADA3 /* DocumentView.storyboard in Resources */,
 				FA1F26162032136F0070ADA3 /* Main.storyboard in Resources */,
 				FA1F25DC203212E50070ADA3 /* LaunchScreen.storyboard in Resources */,
+				FA2FC134208584F400361FEE /* RenameView.storyboard in Resources */,
 				FA1F25D9203212E50070ADA3 /* Assets.xcassets in Resources */,
 				FA1F26182032136F0070ADA3 /* SettingsView.storyboard in Resources */,
 				FA1F26132032136F0070ADA3 /* StrokePopUpView.storyboard in Resources */,
@@ -330,6 +337,7 @@
 				FA1F26202032136F0070ADA3 /* DocumentViewController.swift in Sources */,
 				FA1F261B2032136F0070ADA3 /* NoteCanvas.swift in Sources */,
 				FA010F8E2069A13B00862E93 /* FolderCollectionViewCell.swift in Sources */,
+				FA2FC1382086457800361FEE /* RenameViewController.swift in Sources */,
 				FA1F26192032136F0070ADA3 /* DocumentCollectionViewCell.swift in Sources */,
 				FA1F261F2032136F0070ADA3 /* SettingsViewController.swift in Sources */,
 				FA837C88206323E20070F1BA /* DocumentScrollViewDelegate.swift in Sources */,

@@ -12,7 +12,7 @@ import UIKit
 class DocumentViewController: UIViewController, UIScrollViewDelegate {
     
     //MARK: - Model
-    
+    //branch test
      var cbfile: CBFile? {
         get {
             if NotePadView.strokePaths.count > 1 {

@@ -82,6 +82,19 @@ class MainMenuViewController: UIViewController, UICollectionViewDataSource, UICo
         }
     }
     
+    @IBAction func rename(_ sender: UIBarButtonItem) {
+        /*
+        let sb = UIStoryboard(name: "RenameView", bundle: nil)
+        let RenameView = sb.instantiateInitialViewController()! as! RenameViewController
+        RenameView.strokeSize = Float(NotePadView.strokeSize)
+        RenameView.strokeOpacity = NotePadView.strokeOpacity
+        RenameView.strokeColorHex = NotePadView.strokeColorHex
+        self.present(strokePopUp, animated: true)
+        strokePopUp.onConfirm = onConfirm
+        */
+    }
+ 
+    
     //MARK: - Outlets
     
     @IBOutlet weak var toolbar: UIToolbar!
