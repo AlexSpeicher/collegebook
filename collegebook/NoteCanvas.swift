@@ -13,7 +13,9 @@ class NoteCanvas: UIView {
     var removedStrokes = [[CBFile.Stroke]()]
     var index = 0
     
-    var drawingImage: UIImage?
+    var drawingImage: UIImage? = nil
+    var imageView = UIImageView()
+    
     
     var background: UIColor? {
         didSet {
@@ -24,6 +26,7 @@ class NoteCanvas: UIView {
     
     override init(frame : CGRect){
         super.init(frame: frame)
+        self.addSubview(imageView)
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -58,8 +61,10 @@ class NoteCanvas: UIView {
         let isStylus = touch?.type == .stylus
         if isStylus {
             
-            //UIGraphicsBeginImageContextWithOptions(bounds.size, false, 0.0)
-            //let context = UIGraphicsGetCurrentContext()
+            UIGraphicsBeginImageContextWithOptions(bounds.size, false, 0.0)
+            let context = UIGraphicsGetCurrentContext()
+            
+            drawingImage?.draw(in: bounds)
             
             if let coalescedTouches = event?.coalescedTouches(for: touch!) {
                 for aTouch in coalescedTouches {
@@ -84,18 +89,17 @@ class NoteCanvas: UIView {
                     lowestYPoint = y
                 }
             }
-            //drawLastStroke(context: context, strokes: strokePaths[strokePaths.endIndex - 1])
             
-            //self.drawingImage = UIGraphicsGetImageFromCurrentImageContext()
+            drawLastStroke(context: context, strokes: strokePaths[strokePaths.endIndex - 1])
             
-            //let imageView = UIImageView(image: drawingImage!)
+            self.drawingImage = UIGraphicsGetImageFromCurrentImageContext()
             
-            //imageView.frame = CGRect(x: 0, y: 0, width: drawingImage!.size.width, height: drawingImage!.size.height)
-            //drawingImage?.draw(in: bounds)
-            //self.addSubview(imageView)
+            imageView.image = UIGraphicsGetImageFromCurrentImageContext()
             
-            //UIGraphicsEndImageContext()
-            self.setNeedsDisplay()
+            imageView.frame = self.frame//CGRect(x: 0, y: 0, width: drawingImage!.size.width, height: drawingImage!.size.height)
+            
+            UIGraphicsEndImageContext()
+            //self.setNeedsDisplay()
         }
     }
     
@@ -103,7 +107,7 @@ class NoteCanvas: UIView {
         let touch = touches.first
         let isStylus = touch?.type == .stylus
         if isStylus {
-            
+            imageView.image = self.drawingImage
             let spaceLeft = self.frame.maxY - lowestYPoint
             if spaceLeft < onePageLength! {
                 noteDelegate?.changeNoteFrame()
@@ -180,6 +184,8 @@ class NoteCanvas: UIView {
                 }
             }
         }
+        self.drawingImage = nil
+        imageView.image = UIGraphicsGetImageFromCurrentImageContext()
         UIGraphicsEndImageContext()
     }
     
