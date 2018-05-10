@@ -7,6 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		272C4ED420A3DC450050AC7C /* ScheduleView.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 272C4ED320A3DC450050AC7C /* ScheduleView.storyboard */; };
+		272C4ED620A3DC7D0050AC7C /* addClassView.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 272C4ED520A3DC7C0050AC7C /* addClassView.storyboard */; };
+		272C4ED820A3DCAF0050AC7C /* classItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 272C4ED720A3DCAF0050AC7C /* classItem.swift */; };
+		272C4EDA20A3DCC90050AC7C /* AddClassViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 272C4ED920A3DCC90050AC7C /* AddClassViewController.swift */; };
+		272C4EDC20A3DCDB0050AC7C /* scheduleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 272C4EDB20A3DCDB0050AC7C /* scheduleViewController.swift */; };
 		FA010F8E2069A13B00862E93 /* FolderCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA010F8D2069A13B00862E93 /* FolderCollectionViewCell.swift */; };
 		FA0366902072D1B3006F5725 /* NoteCanvasDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA03668F2072D1B3006F5725 /* NoteCanvasDelegate.swift */; };
 		FA1F25D2203212E50070ADA3 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA1F25D1203212E50070ADA3 /* AppDelegate.swift */; };
@@ -50,6 +55,11 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		272C4ED320A3DC450050AC7C /* ScheduleView.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = ScheduleView.storyboard; sourceTree = "<group>"; };
+		272C4ED520A3DC7C0050AC7C /* addClassView.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = addClassView.storyboard; sourceTree = "<group>"; };
+		272C4ED720A3DCAF0050AC7C /* classItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = classItem.swift; sourceTree = "<group>"; };
+		272C4ED920A3DCC90050AC7C /* AddClassViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddClassViewController.swift; sourceTree = "<group>"; };
+		272C4EDB20A3DCDB0050AC7C /* scheduleViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = scheduleViewController.swift; sourceTree = "<group>"; };
 		FA010F8D2069A13B00862E93 /* FolderCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FolderCollectionViewCell.swift; sourceTree = "<group>"; };
 		FA03668F2072D1B3006F5725 /* NoteCanvasDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteCanvasDelegate.swift; sourceTree = "<group>"; };
 		FA1F25CE203212E50070ADA3 /* collegebook.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = collegebook.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -146,6 +156,11 @@
 				FA1F26022032136E0070ADA3 /* StrokePopUpView.storyboard */,
 				FA1F26102032136F0070ADA3 /* StrokePopUpViewController.swift */,
 				FA1F26032032136E0070ADA3 /* StrokeSettings.swift */,
+				272C4ED320A3DC450050AC7C /* ScheduleView.storyboard */,
+				272C4EDB20A3DCDB0050AC7C /* scheduleViewController.swift */,
+				272C4ED520A3DC7C0050AC7C /* addClassView.storyboard */,
+				272C4ED920A3DCC90050AC7C /* AddClassViewController.swift */,
+				272C4ED720A3DCAF0050AC7C /* classItem.swift */,
 				FA1F25FF203213060070ADA3 /* supportingFiles */,
 				FA1F25DD203212E50070ADA3 /* Info.plist */,
 			);
@@ -288,6 +303,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				272C4ED620A3DC7D0050AC7C /* addClassView.storyboard in Resources */,
+				272C4ED420A3DC450050AC7C /* ScheduleView.storyboard in Resources */,
 				FA1F26152032136F0070ADA3 /* DocumentView.storyboard in Resources */,
 				FA1F26162032136F0070ADA3 /* Main.storyboard in Resources */,
 				FA1F25DC203212E50070ADA3 /* LaunchScreen.storyboard in Resources */,
@@ -331,8 +348,11 @@
 				FA1F261B2032136F0070ADA3 /* NoteCanvas.swift in Sources */,
 				FA010F8E2069A13B00862E93 /* FolderCollectionViewCell.swift in Sources */,
 				FA1F26192032136F0070ADA3 /* DocumentCollectionViewCell.swift in Sources */,
+				272C4EDC20A3DCDB0050AC7C /* scheduleViewController.swift in Sources */,
 				FA1F261F2032136F0070ADA3 /* SettingsViewController.swift in Sources */,
 				FA837C88206323E20070F1BA /* DocumentScrollViewDelegate.swift in Sources */,
+				272C4ED820A3DCAF0050AC7C /* classItem.swift in Sources */,
+				272C4EDA20A3DCC90050AC7C /* AddClassViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -5,7 +5,6 @@
 //  Created by Alex Speicher on 1/6/18.
 //  Copyright © 2018 Alex Speicher. All rights reserved.
 //
-
 import UIKit
 
 class MainMenuViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
@@ -20,7 +19,7 @@ class MainMenuViewController: UIViewController, UICollectionViewDataSource, UICo
     var currentDirectoryURL = [URL]()
     var template: URL?
     
-  
+    
     
     var nextDocumentName: String!
     var selectionEnabled = false {
@@ -38,7 +37,7 @@ class MainMenuViewController: UIViewController, UICollectionViewDataSource, UICo
     private var lastDocumentViewed: UINavigationController?
     private var _lastViewController: DocumentViewController?
     var createDocumentConfirmation: Bool!
-
+    
     
     @IBAction func createNewDocument(_ sender: UIBarButtonItem) {
         createNewDocumnet()
@@ -81,6 +80,14 @@ class MainMenuViewController: UIViewController, UICollectionViewDataSource, UICo
             loadDirectoryContents()
         }
     }
+    @IBAction func openSchedule(_ sender: UIBarButtonItem) {
+        let popOverVC = UIStoryboard(name: "ScheduleView", bundle: nil).instantiateViewController(withIdentifier: "SVC") as! ScheduleViewController
+        self.addChildViewController(popOverVC)
+        popOverVC.view.frame = self.view.frame
+        self.view.addSubview(popOverVC.view)
+        popOverVC.didMove(toParentViewController: self)
+     //   popOverVC.onScheduleClose = onScheduleClose
+    }
     
     //MARK: - Outlets
     
@@ -112,17 +119,17 @@ class MainMenuViewController: UIViewController, UICollectionViewDataSource, UICo
                 DocumentCell.cellPosition = indexPath.item
                 DocumentCell.thumbnail.image = UIImage(named: "DocThumb")
                 /*
-                do {
-                    print("finding thumbnail")
-                    var thumbnailDictionary: AnyObject?
-                    let nsurl = fileURLs[indexPath.item] as NSURL
-                    try nsurl.getPromisedItemResourceValue(&thumbnailDictionary, forKey: URLResourceKey.thumbnailDictionaryKey)
-                    DocumentCell.thumbnail.image = thumbnailDictionary?[URLThumbnailDictionaryItem.NSThumbnail1024x1024SizeKey] as? UIImage
-                } catch {
-                    print("couldn't find thumbnail")
-                    DocumentCell.thumbnail.image = nil
-                }
-                */
+                 do {
+                 print("finding thumbnail")
+                 var thumbnailDictionary: AnyObject?
+                 let nsurl = fileURLs[indexPath.item] as NSURL
+                 try nsurl.getPromisedItemResourceValue(&thumbnailDictionary, forKey: URLResourceKey.thumbnailDictionaryKey)
+                 DocumentCell.thumbnail.image = thumbnailDictionary?[URLThumbnailDictionaryItem.NSThumbnail1024x1024SizeKey] as? UIImage
+                 } catch {
+                 print("couldn't find thumbnail")
+                 DocumentCell.thumbnail.image = nil
+                 }
+                 */
             }
             return cell
         } else {
@@ -163,7 +170,7 @@ class MainMenuViewController: UIViewController, UICollectionViewDataSource, UICo
         lastDocumentViewed = DocummentToBeViewed
         self.present(DocummentToBeViewed, animated: true)
     }
-
+    
     func createNewDocumnet(){
         if lastDocumentViewed != nil {
             _lastViewController?.close()
@@ -172,7 +179,7 @@ class MainMenuViewController: UIViewController, UICollectionViewDataSource, UICo
         let DocummentToBeViewed = sb.instantiateInitialViewController()! as! UINavigationController
         if let _DocumentViewController = DocummentToBeViewed.viewControllers.first as? DocumentViewController {
             _DocumentViewController.filenames = fileNames
-
+            
             if let url = try? currentDirectoryURL.last!.appendingPathComponent(nextDocumentName) {
                 fileManager.createFile(atPath: url.path, contents: Data())
                 _DocumentViewController.document = CBDocument(fileURL: url)
@@ -210,7 +217,7 @@ class MainMenuViewController: UIViewController, UICollectionViewDataSource, UICo
         nextDocumentName = "Untitled".madeUnique(withRespectTo: fileNames) + ".json"
         emojiCollectionView.reloadData()
     }
-
+    
     override var preferredStatusBarStyle: UIStatusBarStyle {
         return .lightContent
     }
@@ -242,14 +249,14 @@ extension MainMenuViewController: DocumentCollectionViewCellDelegate {
         let urlOfFile = fileURLs[atIndex]
         
         /*
-        do {
-            let resources = try urlOfFile.resourceValues(forKeys:[.fileSizeKey])
-            let fileSize = resources.fileSize!
-            print ("\(fileSize)")
-        } catch {
-            print("Error: \(error)")
-        }
-        */
+         do {
+         let resources = try urlOfFile.resourceValues(forKeys:[.fileSizeKey])
+         let fileSize = resources.fileSize!
+         print ("\(fileSize)")
+         } catch {
+         print("Error: \(error)")
+         }
+         */
         
         
         if !selectionEnabled {
