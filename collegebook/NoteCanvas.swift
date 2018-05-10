@@ -63,10 +63,10 @@ class NoteCanvas: UIView {
         let isStylus = touch?.type == .stylus
         if isStylus {
             
-            UIGraphicsBeginImageContextWithOptions(bounds.size, false, 0.0)
-            let context = UIGraphicsGetCurrentContext()
+            //UIGraphicsBeginImageContextWithOptions(bounds.size, false, 0.0)
+            //let context = UIGraphicsGetCurrentContext()
             
-            drawingImage?.draw(in: bounds)
+            //drawingImage?.draw(in: bounds)
             
             if let coalescedTouches = event?.coalescedTouches(for: touch!) {
                 for aTouch in coalescedTouches {
@@ -92,16 +92,16 @@ class NoteCanvas: UIView {
                 }
             }
             
-            drawLastStroke(context: context, strokes: strokePaths[strokePaths.endIndex - 1])
+            //drawLastStroke(context: context, strokes: strokePaths[strokePaths.endIndex - 1])
             
-            self.drawingImage = UIGraphicsGetImageFromCurrentImageContext()
+            //self.drawingImage = UIGraphicsGetImageFromCurrentImageContext()
             
-            imageView.image = UIGraphicsGetImageFromCurrentImageContext()
+            //imageView.image = UIGraphicsGetImageFromCurrentImageContext()
             
-            imageView.frame = self.bounds //CGRect(x: 0, y: 0, width: drawingImage!.size.width, height: drawingImage!.size.height)
+            //imageView.frame = self.bounds //CGRect(x: 0, y: 0, width: drawingImage!.size.width, height: drawingImage!.size.height)
             
-            UIGraphicsEndImageContext()
-            //self.setNeedsDisplay()
+            //UIGraphicsEndImageContext()
+            self.setNeedsDisplay()
         }
     }
     

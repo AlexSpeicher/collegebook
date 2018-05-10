@@ -228,6 +228,7 @@ class MainMenuViewController: UIViewController, UICollectionViewDataSource, UICo
     }
 
     func createNewDocumnet(){
+        
         if lastDocumentViewed != nil {
             _lastViewController?.close()
         }
