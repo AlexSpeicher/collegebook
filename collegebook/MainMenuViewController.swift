@@ -131,6 +131,14 @@ class MainMenuViewController: UIViewController, UICollectionViewDataSource, UICo
         emojiCollectionView.reloadData()
     }
     
+    @IBAction func openSchedule(_ sender: Any) {
+        let popOverVC = UIStoryboard(name: "scheduleView", bundle: nil).instantiateViewController(withIdentifier: "SVC") as! ScheduleViewController
+        self.addChildViewController(popOverVC)
+        popOverVC.view.frame = self.view.frame
+        self.view.addSubview(popOverVC.view)
+        popOverVC.didMove(toParentViewController: self)
+       // popOverVC.onScheduleClose = onScheduleClose
+    }
     //MARK: - Outlets
     
     @IBOutlet weak var toolbar: UIToolbar!
