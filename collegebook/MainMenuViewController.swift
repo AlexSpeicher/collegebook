@@ -23,10 +23,13 @@ class MainMenuViewController: UIViewController, UICollectionViewDataSource, UICo
   
     
     var nextDocumentName: String!
+    var nextFolderName: String!
+    
     var selectionEnabled = false {
         didSet {
             if selectionEnabled == false {
                 toolbar.isHidden = true
+                canMoveTo = false
             }
             else {
                 toolbar.isHidden = false
@@ -34,11 +37,24 @@ class MainMenuViewController: UIViewController, UICollectionViewDataSource, UICo
         }
     }
     
+    var canMoveTo = false {
+        didSet {
+            if !canMoveTo {
+                backButtonLabel.tintColor = #colorLiteral(red: 1, green: 0.5286996188, blue: 0.06793819693, alpha: 1)
+            } else {
+                backButtonLabel.tintColor = UIColor.blue
+            }
+        }
+    }
+    
+    @IBOutlet weak var backButtonLabel: UIBarButtonItem!
     
     private var lastDocumentViewed: UINavigationController?
     private var _lastViewController: DocumentViewController?
     var createDocumentConfirmation: Bool!
 
+    
+    
     
     @IBAction func createNewDocument(_ sender: UIBarButtonItem) {
         createNewDocumnet()
@@ -62,8 +78,25 @@ class MainMenuViewController: UIViewController, UICollectionViewDataSource, UICo
     }
     @IBAction func returnToPreviousFolder(_ sender: UIBarButtonItem) {
         if currentDirectoryURL.count > 1 {
-            currentDirectoryURL.removeLast()
-            loadDirectoryContents()
+            if canMoveTo  {
+                for fileURL in selectedFileUrls {
+                    let FileName = fileURL.lastPathComponent
+                    print(currentDirectoryURL)
+                    let secondToLastIndex = currentDirectoryURL.count - 2
+                    let newFileURL =   currentDirectoryURL[secondToLastIndex].appendingPathComponent(FileName)
+                    do {
+                        try fileManager.moveItem(at: fileURL, to: newFileURL)
+                    } catch let error as NSError {
+                        print("Ooops! Something went wrong: \(error)")
+                    }
+                }
+                selectionEnabled = !selectionEnabled
+                selectedFileUrls.removeAll()
+                loadDirectoryContents()
+            } else {
+                currentDirectoryURL.removeLast()
+                loadDirectoryContents()
+            }
         }
     }
     
@@ -83,17 +116,20 @@ class MainMenuViewController: UIViewController, UICollectionViewDataSource, UICo
     }
     
     @IBAction func rename(_ sender: UIBarButtonItem) {
-        /*
-        let sb = UIStoryboard(name: "RenameView", bundle: nil)
-        let RenameView = sb.instantiateInitialViewController()! as! RenameViewController
-        RenameView.strokeSize = Float(NotePadView.strokeSize)
-        RenameView.strokeOpacity = NotePadView.strokeOpacity
-        RenameView.strokeColorHex = NotePadView.strokeColorHex
-        self.present(strokePopUp, animated: true)
-        strokePopUp.onConfirm = onConfirm
-        */
+        if !selectedFileUrls.isEmpty {
+            let sb = UIStoryboard(name: "RenameView", bundle: nil)
+            let RenameView = sb.instantiateInitialViewController()! as! RenameViewController
+            RenameView.selectedFileNames = selectedFileUrls
+            self.present(RenameView, animated: true)
+            RenameView.onRenameClose = onRenameClose
+        }
     }
  
+    @IBAction func MoveItems(_ sender: UIBarButtonItem) {
+        canMoveTo = !canMoveTo
+        print(canMoveTo)
+        emojiCollectionView.reloadData()
+    }
     
     //MARK: - Outlets
     
@@ -107,7 +143,7 @@ class MainMenuViewController: UIViewController, UICollectionViewDataSource, UICo
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return fileNames.count
+        return fileURLs.count
     }
     
     private var font: UIFont {
@@ -121,7 +157,7 @@ class MainMenuViewController: UIViewController, UICollectionViewDataSource, UICo
             if let DocumentCell = cell as? DocumentCollectionViewCell {
                 DocumentCell.delegate = self
                 let text = NSAttributedString(string: fileURLs[indexPath.item].deletingPathExtension().lastPathComponent, attributes: [.font:font])
-                DocumentCell.displayContent(name: text, mode: selectionEnabled)
+                DocumentCell.displayContent(name: text, mode: selectionEnabled, mode2: canMoveTo)
                 DocumentCell.cellPosition = indexPath.item
                 DocumentCell.thumbnail.image = UIImage(named: "DocThumb")
                 /*
@@ -144,7 +180,7 @@ class MainMenuViewController: UIViewController, UICollectionViewDataSource, UICo
             if let DocumentCell = cell as? DocumentCollectionViewCell {
                 DocumentCell.delegate = self
                 let text = NSAttributedString(string: fileNames[indexPath.item], attributes: [.font:font])
-                DocumentCell.displayContent(name: text, mode: selectionEnabled)
+                DocumentCell.displayContent(name: text, mode: selectionEnabled, mode2: canMoveTo, isFolder: true)
                 DocumentCell.cellPosition = indexPath.item
                 DocumentCell.thumbnail.image = UIImage(named: "DocFolder")
             }
@@ -161,6 +197,20 @@ class MainMenuViewController: UIViewController, UICollectionViewDataSource, UICo
         else {
             print("last doc not working")
         }
+    }
+    
+    func onRenameClose(_ renamedFiles: [URL]) -> (){
+        for (index, newURL) in renamedFiles.enumerated(){
+            //print(URL)
+            do {
+                try fileManager.moveItem(at: selectedFileUrls[index], to: newURL)
+            } catch let error as NSError {
+                print("Ooops! Something went wrong: \(error)")
+            }
+        }
+        selectionEnabled = !selectionEnabled
+        selectedFileUrls.removeAll()
+        loadDirectoryContents()
     }
     
     func presentDocument(at documentURL: URL){
@@ -197,8 +247,7 @@ class MainMenuViewController: UIViewController, UICollectionViewDataSource, UICo
     }
     
     func createFolder(){
-        let folderPath = currentDirectoryURL.last!.appendingPathComponent("Untitled Folder")
-        //let folderPath = documentDirecortyURL!.appendingPathComponent("Untitled Folder")
+        let folderPath = currentDirectoryURL.last!.appendingPathComponent(nextFolderName)
         do {
             try FileManager.default.createDirectory(at: folderPath, withIntermediateDirectories: false, attributes: nil)
         } catch let error as NSError {
@@ -220,7 +269,8 @@ class MainMenuViewController: UIViewController, UICollectionViewDataSource, UICo
         } catch {
             print("Error while enumerating files : \(error.localizedDescription)")
         }
-        nextDocumentName = "Untitled".madeUnique(withRespectTo: fileNames) + ".json"
+        nextDocumentName = "Document".madeUnique(withRespectTo: fileNames) + ".json"
+        nextFolderName = "Folder".madeUnique(withRespectTo: fileNames)
         emojiCollectionView.reloadData()
     }
 
@@ -251,19 +301,9 @@ class MainMenuViewController: UIViewController, UICollectionViewDataSource, UICo
 }
 
 extension MainMenuViewController: DocumentCollectionViewCellDelegate {
-    func returnObjectPosition(atIndex: Int) {
+    func returnObjectPosition(atIndex: Int, folderStatus: Bool) {
         let urlOfFile = fileURLs[atIndex]
-        
-        /*
-        do {
-            let resources = try urlOfFile.resourceValues(forKeys:[.fileSizeKey])
-            let fileSize = resources.fileSize!
-            print ("\(fileSize)")
-        } catch {
-            print("Error: \(error)")
-        }
-        */
-        
+        let isaFolder = folderStatus
         
         if !selectionEnabled {
             if urlOfFile.pathExtension == "json" {
@@ -274,7 +314,23 @@ extension MainMenuViewController: DocumentCollectionViewCellDelegate {
                 loadDirectoryContents()
             }
         } else {
-            if selectedFileUrls.contains(urlOfFile){
+            if canMoveTo && isaFolder {
+                for fileURL in selectedFileUrls {
+                    let FileName = fileURL.lastPathComponent
+                    let newFileURL = urlOfFile.appendingPathComponent(FileName)
+                    
+                    do {
+                        try fileManager.moveItem(at: fileURL, to: newFileURL)
+                    } catch let error as NSError {
+                        print("Ooops! Something went wrong: \(error)")
+                    }
+                    //print(FileName)
+                }
+                loadDirectoryContents()
+                selectedFileUrls.removeAll()
+                selectionEnabled = !selectionEnabled
+                //print(urlOfFile)
+            } else if selectedFileUrls.contains(urlOfFile){
                 if let index = selectedFileUrls.index(of: urlOfFile){
                     selectedFileUrls.remove(at: index)
                 }

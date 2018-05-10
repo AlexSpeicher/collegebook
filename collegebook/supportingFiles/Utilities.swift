@@ -21,6 +21,7 @@ extension String {
         return possiblyUnique
     }
 }
+
 //  Created by CS193p Instructor.
 //  Copyright © 2017 Stanford University. All rights reserved.
 extension UIView {

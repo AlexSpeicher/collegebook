@@ -20,6 +20,16 @@ class DocumentCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var label: UILabel!
     var cellPosition: Int?
     var selcectionMode: Bool?
+    var mayEnter = false
+    
+    var isFolder = false {
+        didSet {
+            if mayEnter && isFolder {
+                self.selectedMode.textColor = UIColor.blue
+            }
+        }
+    }
+
     var gotSelected = false
     
     var delegate: DocumentCollectionViewCellDelegate?
@@ -30,7 +40,11 @@ class DocumentCollectionViewCell: UICollectionViewCell {
     
     @IBAction func openFile(_ sender: UIButton) {
         if self.selcectionMode!{
-            if !gotSelected {
+            if isFolder && mayEnter{
+                self.selectedMode.text = "✓"
+                self.selectedMode.textColor = UIColor.blue
+                self.gotSelected = false
+            } else if !gotSelected {
                 self.selectedMode.text = "✓"
                 self.selectedMode.textColor = UIColor.orange
                 self.gotSelected = true
@@ -40,21 +54,19 @@ class DocumentCollectionViewCell: UICollectionViewCell {
                 self.gotSelected = false
             }
         }
-        delegate?.returnObjectPosition(atIndex: cellPosition!)
+        delegate?.returnObjectPosition(atIndex: cellPosition!, folderStatus: isFolder)
     }
     
     
-    func displayContent(name: NSAttributedString, mode: Bool){
+    func displayContent(name: NSAttributedString, mode: Bool, mode2: Bool, isFolder: Bool = false){
         self.label.attributedText = name
         self.selcectionMode = mode
         self.selectedMode.text = "◎"
         self.selectedMode.textColor = UIColor.black
         self.selectedMode.isHidden = !mode
         self.gotSelected = false
-        
-        /*if self.selcectionMode == false {
-            
-        }*/
+        self.mayEnter = mode2
+        self.isFolder = isFolder
     }
 }
 

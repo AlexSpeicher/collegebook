@@ -30,7 +30,9 @@ class NoteCanvas: UIView {
     }
     
     required init?(coder aDecoder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
+        super.init(coder: aDecoder)
+        self.addSubview(imageView)
+        //fatalError("init(coder:) has not been implemented")
     }
     // MARK: - Stroke variables
     var strokeSize: Float = 5.0
@@ -96,7 +98,7 @@ class NoteCanvas: UIView {
             
             imageView.image = UIGraphicsGetImageFromCurrentImageContext()
             
-            imageView.frame = self.frame//CGRect(x: 0, y: 0, width: drawingImage!.size.width, height: drawingImage!.size.height)
+            imageView.frame = self.bounds //CGRect(x: 0, y: 0, width: drawingImage!.size.width, height: drawingImage!.size.height)
             
             UIGraphicsEndImageContext()
             //self.setNeedsDisplay()

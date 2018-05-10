@@ -9,5 +9,5 @@
 import Foundation
 
 protocol DocumentCollectionViewCellDelegate {
-    func returnObjectPosition(atIndex: Int)
+    func returnObjectPosition(atIndex: Int, folderStatus: Bool)
 }

@@ -109,6 +109,12 @@
                                             <action selector="rename:" destination="BYZ-38-t0r" id="Vc2-hW-QL6"/>
                                         </connections>
                                     </barButtonItem>
+                                    <barButtonItem title="Move" id="AlJ-UQ-vhj">
+                                        <color key="tintColor" red="1" green="0.52869961880000005" blue="0.06793819693" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <connections>
+                                            <action selector="MoveItems:" destination="BYZ-38-t0r" id="CDV-Sv-JUl"/>
+                                        </connections>
+                                    </barButtonItem>
                                     <barButtonItem width="42" style="plain" systemItem="fixedSpace" id="vPS-2c-oNm"/>
                                 </items>
                                 <color key="barTintColor" red="0.236828702" green="0.23917354060000001" blue="0.23917354060000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -158,6 +164,7 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="backButtonLabel" destination="rUx-Ce-elf" id="u1W-2H-G55"/>
                         <outlet property="emojiCollectionView" destination="hoE-AR-vO8" id="u3X-dg-9WP"/>
                         <outlet property="toolbar" destination="4vM-a2-jLN" id="YqH-V9-OHi"/>
                     </connections>
